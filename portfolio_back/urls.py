@@ -4,8 +4,11 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from rest_framework import routers
 
+from accounts.viewsets import AccountViewSet
+
 
 router = routers.DefaultRouter()
+router.register(r'accounts', AccountViewSet, base_name='accounts')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

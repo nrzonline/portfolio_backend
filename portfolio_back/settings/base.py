@@ -70,6 +70,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+}
+
 LANGUAGE_CODE = 'NL-nl'
 TIME_ZONE = 'Europe/Amsterdam'
 TIME_ZONE_PYTZ = pytz.timezone(TIME_ZONE)

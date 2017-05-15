@@ -1,0 +1,11 @@
+.git/
+media/
+htmlcov/
+
+portfolio_back/settings/development.py
+portfolio_back/settings/secret.py
+portfolio_back/settings/load.py
+
+db.sqlite3
+*.pyc
+.coverage

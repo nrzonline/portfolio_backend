@@ -9,6 +9,6 @@ class UserFactory(factory.DjangoModelFactory):
 	model = User
 	django_get_or_create = ('username', )
 
-	id = factory.Sequence(lambda n: n)
-	username = "Username"
+    id = factory.Sequence(lambda n: n)
+    username = "username"
 

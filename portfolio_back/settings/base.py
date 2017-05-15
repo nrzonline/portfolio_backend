@@ -25,6 +25,9 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'accounts',
+    'contact',
+    'projects',
+    'skills',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +86,7 @@ TIME_ZONE = 'Europe/Amsterdam'
 TIME_ZONE_PYTZ = pytz.timezone(TIME_ZONE)
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (

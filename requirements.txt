@@ -1,6 +1,17 @@
 appdirs==1.4.3
+coverage==4.4
 Django==1.11.1
+django-cors-headers==2.1.0
+django-ipware==1.1.6
+django-suit==0.2.25
+djangorestframework==3.6.3
+factory-boy==2.8.1
+Faker==0.7.12
+ipaddress==1.0.18
+olefile==0.44
 packaging==16.8
+Pillow==4.1.1
 pyparsing==2.2.0
+python-dateutil==2.6.0
 pytz==2017.2
 six==1.10.0

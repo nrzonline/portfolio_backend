@@ -11,7 +11,7 @@ LOAD_SETTINGS = DEVELOPMENT
 
 def raise_error_on_missing_settings_file(settings_file):
     settings_file_path = os.path.join(
-        'portfolio_back', os.path.join('settings', '%s.py' % settings_file))
+        'portfolio', os.path.join('settings', '%s.py' % settings_file))
 
     if not os.path.exists(settings_file_path):
         raise ImproperlyConfigured(

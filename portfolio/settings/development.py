@@ -1,10 +1,10 @@
-from portfolio_back.settings import secret
+from portfolio.settings import secret
 from django.conf import settings
 import sys
 import os
 
 
-globals().update(vars(sys.modules['portfolio_back.settings.base']))
+globals().update(vars(sys.modules['portfolio.settings.base']))
 
 DEBUG = True
 

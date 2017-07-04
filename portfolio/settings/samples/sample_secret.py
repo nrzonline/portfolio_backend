@@ -1,6 +1,6 @@
 import sys
 
-globals().update(vars(sys.modules['portfolio_back.settings.base']))
+globals().update(vars(sys.modules['portfolio.settings.base']))
 
 SECRET_KEY = ''
 

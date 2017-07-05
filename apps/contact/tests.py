@@ -38,5 +38,6 @@ class TestSkillsAPI(APITestCase):
             **{
                 'REMOTE_ADDR': '127.0.0.1',
                 'REMOTE_HOST': 'localhost',
-            })
+            }
+        )
         self.assertEqual(response.status_code, 201)

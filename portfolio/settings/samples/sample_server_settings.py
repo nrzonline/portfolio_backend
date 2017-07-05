@@ -19,3 +19,6 @@ DATABASES = {
     }
 }
 
+RAVEN_CONFIG = {
+    'dsn': secret.SECRET_RAVEN_DNS,
+}

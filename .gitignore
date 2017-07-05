@@ -3,9 +3,9 @@ media/
 htmlcov/
 .idea/
 
-portfolio_back/settings/development.py
-portfolio_back/settings/secret.py
-portfolio_back/settings/load.py
+portfolio/settings/development.py
+portfolio/settings/secret.py
+portfolio/settings/load.py
 
 db.sqlite3
 *.pyc

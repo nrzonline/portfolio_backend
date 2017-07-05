@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'raven.contrib.django.raven_compat',
     'rest_framework',
     'corsheaders',
 
@@ -81,6 +82,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
 }
+
 
 LANGUAGE_CODE = 'NL-nl'
 TIME_ZONE = 'Europe/Amsterdam'

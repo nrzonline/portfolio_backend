@@ -1,4 +1,5 @@
 appdirs==1.4.3
+contextlib2==0.5.5
 coverage==4.4
 Django==1.11.1
 django-cors-headers==2.1.0
@@ -14,4 +15,5 @@ Pillow==4.1.1
 pyparsing==2.2.0
 python-dateutil==2.6.0
 pytz==2017.2
+raven==6.1.0
 six==1.10.0

@@ -1,5 +1,6 @@
 from portfolio.settings import secret
 from django.conf import settings
+import raven
 import sys
 import os
 
@@ -19,3 +20,6 @@ DATABASES = {
     }
 }
 
+RAVEN_CONFIG = {
+    'dsn': secret.SECRET_RAVEN_DNS,
+}

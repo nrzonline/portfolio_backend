@@ -15,10 +15,10 @@ class Project(models.Model):
         _("Project title"),
         max_length=50,
         unique=True)
-    short_description = models.CharField(
+    short_description = models.TextField(
         _("Short description"),
         max_length=1500)
-    full_description = models.CharField(
+    full_description = models.TextField(
         _("Full description"),
         max_length=5000)
     url = models.URLField(

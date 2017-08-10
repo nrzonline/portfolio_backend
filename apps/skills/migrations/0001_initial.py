@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('level_max', models.IntegerField(default=5, verbose_name='Level caps')),
                 ('level', models.IntegerField(verbose_name='Current skill level')),
                 ('is_published', models.BooleanField(verbose_name='Is published?')),
-                ('icon', models.ImageField(blank=True, height_field='height', null=True, upload_to=skills.models.skill_icon_upload_location, verbose_name='Icon', width_field='width')),
+                ('icon', models.ImageField(blank=True, height_field='height', null=True, upload_to=skills.models.skill_image_upload_location, verbose_name='Icon', width_field='width')),
                 ('width', models.IntegerField(blank=True, null=True, verbose_name='Icon width')),
                 ('height', models.IntegerField(blank=True, null=True, verbose_name='Icon height')),
                 ('datetime_added', models.DateTimeField(auto_now_add=True)),

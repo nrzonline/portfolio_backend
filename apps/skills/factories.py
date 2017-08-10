@@ -24,4 +24,4 @@ class SkillFactory(factory.DjangoModelFactory):
     level_max = 5
     level = 5
     is_published = True
-    icon = factory.django.ImageField()
+    image = factory.django.ImageField()

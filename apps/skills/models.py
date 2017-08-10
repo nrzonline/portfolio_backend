@@ -9,9 +9,9 @@ from django.utils.translation import ugettext as _
 from utils.services import unique_filename
 
 
-def skill_icon_upload_location(instance, filename):
+def skill_image_upload_location(instance, filename):
     filename = unique_filename(filename)
-    return 'uploads/skills/icons/%s' % filename
+    return 'uploads/skills/images/%s' % filename
 
 
 class Skill(models.Model):
@@ -33,17 +33,17 @@ class Skill(models.Model):
         _("Current skill level"))
     is_published = models.BooleanField(
         _("Is published?"))
-    icon = models.ImageField(
-        _("Icon"),
+    image = models.ImageField(
+        _("Image"),
         width_field='width',
         height_field='height',
-        upload_to=skill_icon_upload_location,
+        upload_to=skill_image_upload_location,
         null=True, blank=True)
     width = models.IntegerField(
-        _("Icon width"),
+        _("Image width"),
         null=True, blank=True)
     height = models.IntegerField(
-        _("Icon height"),
+        _("Image height"),
         null=True, blank=True)
     datetime_added = models.DateTimeField(
         auto_now_add=True)

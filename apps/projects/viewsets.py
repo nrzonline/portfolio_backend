@@ -1,9 +1,10 @@
 from rest_framework import viewsets
 
+
 from projects.models import (
-    Project, ProjectAttachment, ProjectImage, ProjectLink)
+     Project, ProjectAttachment, ProjectImage, ProjectLink)
 from projects.serializers import (
-    ProjectSerializer, ImageSerializer, AttachmentSerializer, LinkSerializer)
+     ProjectSerializer, ImageSerializer, AttachmentSerializer, LinkSerializer)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

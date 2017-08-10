@@ -6,7 +6,7 @@ from rest_framework.test import APITestCase
 import tempfile
 
 from skills.factories import SkillFactory, SkillCategoryFactory
-from skills.models import skill_icon_upload_location
+from skills.models import skill_image_upload_location
 
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp()
@@ -14,12 +14,12 @@ TEMP_MEDIA_ROOT = tempfile.mkdtemp()
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class TestSkillModel(TestCase):
-    def test_project_attachment_upload_location(self):
-        filename = "icon.png"
-        upload_location = skill_icon_upload_location(None, filename)
+    def test_skill_image_upload_location(self):
+        filename = "image.png"
+        upload_location = skill_image_upload_location(None, filename)
 
         self.assertTrue(upload_location.startswith(
-            'uploads/skills/icons/'))
+            'uploads/skills/images/'))
 
     def test_skill_datetime_modified_on_update(self):
         skill = SkillFactory.create()

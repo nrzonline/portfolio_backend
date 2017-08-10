@@ -22,7 +22,7 @@ class SkillAdmin(admin.ModelAdmin):
         'level_max',
         'level',
         'is_published',
-        'icon',
+        'image',
         'datetime_added',
         'datetime_modified',)
 

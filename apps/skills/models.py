@@ -18,10 +18,10 @@ class Skill(models.Model):
     title = models.CharField(
         _("Skill title"),
         max_length=50)
-    short_description = models.CharField(
+    short_description = models.TextField(
         _("Short description"),
-        max_length=500)
-    full_description = models.CharField(
+        max_length=2000)
+    full_description = models.TextField(
         _("Full description"),
         max_length=5000)
     category = models.ForeignKey(

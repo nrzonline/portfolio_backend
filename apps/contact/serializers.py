@@ -1,12 +1,6 @@
 from rest_framework import serializers
 
-from contact.models import ContactDetail, ContactMessage
-
-
-class ContactDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ContactDetail
-        fields = '__all__'
+from contact.models import ContactMessage
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):

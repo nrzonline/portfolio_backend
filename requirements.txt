@@ -3,6 +3,7 @@ contextlib2==0.5.5
 coverage==4.4
 Django==1.11.1
 django-cors-headers==2.1.0
+django-filter==1.0.4
 django-ipware==1.1.6
 django-suit==0.2.25
 djangorestframework==3.6.3

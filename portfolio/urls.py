@@ -8,22 +8,20 @@ from projects.viewsets import (
     ProjectViewSet, AttachmentViewSet, ImageViewSet, LinkViewSet)
 from accounts.viewsets import AccountViewSet
 from skills.viewsets import SkillViewSet, SkillCategoryViewSet
-from contact.viewsets import ContactDetailViewSet, ContactMessageViewSet
+from contact.viewsets import ContactMessageViewSet
+from about.viewsets import AboutViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'accounts', AccountViewSet, base_name='accounts')
 router.register(r'projects', ProjectViewSet, base_name='projects')
 router.register(r'project-images', ImageViewSet, base_name='images')
-router.register(r'project-attachments', AttachmentViewSet,
-                base_name='attachments')
+router.register(r'project-attachments', AttachmentViewSet, base_name='attachments')
 router.register(r'project-links', LinkViewSet, base_name='links')
 router.register(r'skills', SkillViewSet, base_name='skills')
-router.register(r'skill-categories', SkillCategoryViewSet,
-                base_name='categories')
-router.register(r'contact', ContactDetailViewSet, base_name='contact')
-router.register(r'contact-messages', ContactMessageViewSet,
-                base_name='contact-messages')
+router.register(r'skill-categories', SkillCategoryViewSet, base_name='categories')
+router.register(r'contact-messages', ContactMessageViewSet, base_name='contact-messages')
+router.register(r'about', AboutViewSet, base_name='about')
 
 
 urlpatterns = [

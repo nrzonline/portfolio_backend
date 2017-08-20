@@ -1,14 +1,7 @@
-from rest_framework import viewsets, mixins, permissions, generics
+from rest_framework import viewsets, mixins, permissions
 
-from contact.serializers import ContactDetailSerializer, \
-    ContactMessageSerializer
-from contact.models import ContactDetail, ContactMessage
+from contact.serializers import ContactMessageSerializer
 from utils.services import get_ip_address
-
-
-class ContactDetailViewSet(viewsets.ModelViewSet):
-    serializer_class = ContactDetailSerializer
-    queryset = ContactDetail.objects.all()
 
 
 class ContactMessageViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):

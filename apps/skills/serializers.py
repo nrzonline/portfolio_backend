@@ -15,3 +15,4 @@ class SkillSerializer(serializers.ModelSerializer):
         exclude = ('width', 'height', )
 
     category = SkillCategorySerializer()
+

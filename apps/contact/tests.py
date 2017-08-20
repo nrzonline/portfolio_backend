@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from rest_framework.test import APITestCase
 
-from contact.factories import ContactDetailFactory, ContactMessageFactory
+from contact.factories import ContactMessageFactory
 from contact.forms import ContactForm
 
 
@@ -19,12 +19,7 @@ class TestContactForm(TestCase):
         self.assertTrue(form.is_valid())
 
 
-class TestSkillsAPI(APITestCase):
-    def test_contact_detail_api_request(self):
-        ContactDetailFactory.create()
-        response = self.client.get('/api/contact/1/')
-        self.assertEqual(response.status_code, 200)
-
+class TestContactAPI(APITestCase):
     def test_contact_get_returns_405_method_not_allowed(self):
         response = self.client.get('/api/contact-messages/')
         self.assertEqual(response.status_code, 405)

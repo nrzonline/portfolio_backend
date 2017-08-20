@@ -2,6 +2,7 @@
 media/
 htmlcov/
 .idea/
+static/
 
 portfolio/settings/development.py
 portfolio/settings/secret.py

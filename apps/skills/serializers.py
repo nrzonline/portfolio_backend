@@ -16,3 +16,8 @@ class SkillSerializer(serializers.ModelSerializer):
 
     category = SkillCategorySerializer()
 
+
+class SimpleSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ('id', 'title', 'slug',)

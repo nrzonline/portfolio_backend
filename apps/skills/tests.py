@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase, override_settings
-from rest_framework.test import APITestCase
 import tempfile
 
 from skills.factories import SkillFactory, SkillCategoryFactory
@@ -51,25 +50,3 @@ class TestSkillCategoryModel(TestCase):
         category.save()
 
         self.assertEqual(category.slug, "a-new-title")
-
-
-class TestSkillsAPI(APITestCase):
-    def test_skill_api_list_request(self):
-        SkillFactory.create()
-        response = self.client.get('/api/skills/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_skill_api_detail_request(self):
-        SkillFactory.create()
-        response = self.client.get('/api/skills/1/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_skill_category_api_list_request(self):
-        SkillCategoryFactory.create()
-        response = self.client.get('/api/skill-categories/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_skill_category_api_detail_request(self):
-        SkillCategoryFactory.create()
-        response = self.client.get('/api/skill-categories/1/')
-        self.assertEqual(response.status_code, 200)

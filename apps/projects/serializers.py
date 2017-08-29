@@ -1,15 +1,20 @@
 from rest_framework import serializers
 
-from accounts.serializers import AccountSerializer
 from projects.models import (
-    Project, ProjectAttachment, ProjectImage, ProjectLink)
-from skills.serializers import SkillSerializer
+     Project, ProjectAttachment, ProjectImage, ProjectLink)
+from skills.serializers import SimpleSkillSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectImage
-        exclude = ()
+        exclude = ('is_published', 'project', 'datetime_added', 'datetime_modified', 'user', )
+
+
+class SimpleImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectImage
+        fields = ('id', 'title', 'image',)
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
@@ -24,14 +29,20 @@ class LinkSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        exclude = ()
+        fields = ('id', 'title', 'slug', 'is_published', 'published_images',)
 
-    user = AccountSerializer()
-    skills = SkillSerializer(read_only=True, many=True)
+    published_images = SimpleImageSerializer(read_only=True, many=True)
+
+
+class ProjectDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        exclude = ('user', 'is_published',)
+
+    skills = SimpleSkillSerializer(read_only=True, many=True)
     published_images = ImageSerializer(read_only=True, many=True)
     published_attachments = AttachmentSerializer(read_only=True, many=True)
     published_links = LinkSerializer(read_only=True, many=True)
-

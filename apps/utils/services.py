@@ -26,5 +26,4 @@ def get_ip_address(request):
 
     if not ip_address:
         ip_address = ip.get_ip(request)
-
     return ip_address

@@ -3,13 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import IntegrityError
 from django.test import TestCase, override_settings
-from rest_framework.test import APITestCase
 import tempfile
 
-from projects.factories import ProjectFactory, ProjectImageFactory, \
-    ProjectAttachmentFactory, ProjectLinkFactory
-from projects.models import ProjectImage, \
-    project_image_upload_location, project_attachment_upload_location
+from projects.factories import (
+     ProjectFactory, ProjectImageFactory, ProjectAttachmentFactory, ProjectLinkFactory)
+from projects.models import (
+     ProjectImage, project_image_upload_location, project_attachment_upload_location)
 
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp()
@@ -113,45 +112,3 @@ class TestProjectLinkModel(TestCase):
 
         project_link.save()
         self.assertNotEqual(project_link.datetime_modified, None)
-
-
-class TestProjectsAPI(APITestCase):
-    def test_project_api_list_request(self):
-        ProjectFactory.create()
-        response = self.client.get('/api/projects/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_api_detail_request(self):
-        ProjectFactory.create()
-        response = self.client.get('/api/projects/1/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_image_list_request(self):
-        ProjectImageFactory.create()
-        response = self.client.get('/api/project-images/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_image_detail_request(self):
-        ProjectImageFactory.create()
-        response = self.client.get('/api/project-images/1/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_attachment_detail_request(self):
-        ProjectAttachmentFactory.create()
-        response = self.client.get('/api/project-attachments/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_attachment_list_request(self):
-        ProjectAttachmentFactory.create()
-        response = self.client.get('/api/project-attachments/1/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_link_list_request(self):
-        ProjectLinkFactory.create()
-        response = self.client.get('/api/project-links/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_project_link_detail_request(self):
-        ProjectLinkFactory.create()
-        response = self.client.get('/api/project-links/1/')
-        self.assertEqual(response.status_code, 200)

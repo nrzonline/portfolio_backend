@@ -1,27 +1,23 @@
 from rest_framework import viewsets
 
 
-from projects.models import (
-     Project, ProjectAttachment, ProjectImage, ProjectLink)
-from projects.serializers import (
-     ProjectSerializer, ImageSerializer, AttachmentSerializer, LinkSerializer)
+from projects.models import Project
+from projects.serializers import ProjectListSerializer, ProjectDetailSerializer
+from utils.services import get_ip_address
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    serializer_class = ProjectSerializer
     queryset = Project.objects.filter(is_published=True)
 
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ProjectListSerializer
+        return ProjectDetailSerializer
 
-class ImageViewSet(viewsets.ModelViewSet):
-    serializer_class = ImageSerializer
-    queryset = ProjectImage.objects.filter(is_published=True)
+    def retrieve(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        print('projects', pk, get_ip_address(self.request))
+
+        return super(ProjectViewSet, self).retrieve(request, *args, **kwargs)
 
 
-class AttachmentViewSet(viewsets.ModelViewSet):
-    serializer_class = AttachmentSerializer
-    queryset = ProjectAttachment.objects.filter(is_published=True)
-
-
-class LinkViewSet(viewsets.ModelViewSet):
-    serializer_class = LinkSerializer
-    queryset = ProjectLink.objects.filter(is_published=True)

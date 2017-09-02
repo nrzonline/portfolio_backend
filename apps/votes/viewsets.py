@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from django.contrib.contenttypes.models import ContentType
@@ -11,6 +12,12 @@ from utils.services import get_ip_address
 class VoteViewSet(viewsets.ViewSet):
     def get_object_votes(self, request, model, object_id):
         content_type = ContentType.objects.get(model=model)
+
+        try:
+            content_type.get_object_for_this_type(pk=object_id)
+        except ObjectDoesNotExist:
+            return Response({'error': 'OBJECT_NOT_FOUND'}, status=status.HTTP_404_NOT_FOUND)
+
         votes_cast = {
             'client_vote': None,
         }
@@ -34,15 +41,20 @@ class VoteViewSet(viewsets.ViewSet):
         content_type = ContentType.objects.get(model=model)
         ip_address = get_ip_address(request)
 
+        try:
+            content_type.get_object_for_this_type(pk=object_id)
+        except ObjectDoesNotExist:
+            return Response({'error': 'OBJECT_NOT_FOUND'}, status=status.HTTP_404_NOT_FOUND)
+
         vote_data = {
             'ip_address': ip_address,
             'content_type': content_type,
             'object_id': object_id,
         }
         object_vote_cast_by_ip_address = services.get_object_vote_cast_by_ip_address(**vote_data)
+        if object_vote_cast_by_ip_address:
+            return Response({'error': 'VOTE_ALREADY_CAST_BY_CLIENT'}, status=status.HTTP_200_OK)
 
-        if not object_vote_cast_by_ip_address:
-            Vote.objects.create(vote=vote, **vote_data)
-            return Response({'success': 'VOTE_CAST'}, status=status.HTTP_200_OK)
-        return Response({'error': 'VOTE_ALREADY_CAST_BY_CLIENT'}, status=status.HTTP_200_OK)
+        Vote.objects.create(vote=vote, **vote_data)
+        return Response({'success': 'VOTE_CAST'}, status=status.HTTP_200_OK)
 

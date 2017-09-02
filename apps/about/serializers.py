@@ -6,4 +6,4 @@ from about.models import About
 class AboutSerializer(serializers.ModelSerializer):
     class Meta:
         model = About
-        exclude = ()
+        exclude = ('phone_number', 'email',)

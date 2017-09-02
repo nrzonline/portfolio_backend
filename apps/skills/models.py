@@ -79,6 +79,10 @@ class SkillCategory(models.Model):
         _("Position on frontend"))
     slug = models.SlugField()
 
+    @property
+    def skills(self):
+        return Skill.objects.filter(category=self.id)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         return super(SkillCategory, self).save(*args, **kwargs)

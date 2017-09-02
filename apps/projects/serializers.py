@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from projects.models import (
      Project, ProjectAttachment, ProjectImage, ProjectLink)
-from skills.serializers import SimpleSkillSerializer
+from skills.serializers import SkillSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -42,7 +42,7 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
         model = Project
         exclude = ('user', 'is_published',)
 
-    skills = SimpleSkillSerializer(read_only=True, many=True)
+    skills = SkillSerializer(read_only=True, many=True)
     published_images = ImageSerializer(read_only=True, many=True)
     published_attachments = AttachmentSerializer(read_only=True, many=True)
     published_links = LinkSerializer(read_only=True, many=True)

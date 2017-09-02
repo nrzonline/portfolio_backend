@@ -11,7 +11,7 @@ class VoteAdmin(admin.ModelAdmin):
         model = Vote
 
     exclude = ()
-    list_display = ('vote', 'content_type', 'object_id', 'ip_address', )
+    list_display = ('vote', 'content_type', 'object_id', 'ip_address', 'datetime',)
 
 admin.site.register(Vote, VoteAdmin)
 

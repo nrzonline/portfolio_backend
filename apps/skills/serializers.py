@@ -3,7 +3,7 @@ from rest_framework import serializers
 from skills.models import Skill, SkillCategory
 
 
-class SkillCategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SkillCategory
         exclude = ()
@@ -12,12 +12,21 @@ class SkillCategorySerializer(serializers.ModelSerializer):
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        exclude = ('width', 'height', )
+        exclude = ('width', 'height', 'is_published',)
 
-    category = SkillCategorySerializer()
+    category = CategorySerializer()
 
 
-class SimpleSkillSerializer(serializers.ModelSerializer):
+class SkillWithoutCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ('id', 'title', 'slug',)
+        fields = ('id', 'title', 'image', 'level_max', 'level', 'slug', )
+
+
+class CategorizedSkillsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SkillCategory
+        exclude = ()
+
+    skills = SkillWithoutCategorySerializer(many=True)
+

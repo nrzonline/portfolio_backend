@@ -21,13 +21,8 @@ class Vote(models.Model):
 
     vote = models.IntegerField(_("Vote rating"), choices=VOTE_CHOICES, default=0)
 
-    comment = models.CharField(_("Comment"), max_length=2000, null=True, blank=True)
-    name = models.CharField(_("Voter's name"), max_length=255, null=True, blank=True)
-    email_address = models.EmailField(_("E-mail Address"), max_length=255, null=True, blank=True)
-
     ip_address = models.GenericIPAddressField(_("IP Address"), max_length=255)
-    hide_comment = models.BooleanField(_("Hide comment"), default=False)
-    cancel_vote = models.BooleanField(_("Cancel vote"), default=False)
+    datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
         unique_together = ('content_type', 'object_id', 'ip_address',)

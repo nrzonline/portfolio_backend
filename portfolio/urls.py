@@ -11,6 +11,7 @@ from contact.viewsets import ContactMessageViewSet
 from about.viewsets import AboutViewSet
 from votes.viewsets import VoteViewSet
 from statistics.viewsets import RequestCountViewSet
+from resume.viewsets import WorkViewSet, EducationViewSet, InterestViewSet
 
 
 router = routers.DefaultRouter()
@@ -20,6 +21,9 @@ router.register(r'skill', SkillViewSet, base_name='skills')
 router.register(r'skill-category', SkillCategoryViewSet, base_name='categories')
 router.register(r'contact-message', ContactMessageViewSet, base_name='contact-messages')
 router.register(r'about', AboutViewSet, base_name='about')
+router.register(r'work', WorkViewSet, base_name='work')
+router.register(r'education', EducationViewSet, base_name='education')
+router.register(r'interest', InterestViewSet, base_name='interest')
 
 get_object_votes = VoteViewSet.as_view({'get': 'get_object_votes'})
 cast_object_vote = VoteViewSet.as_view({'get': 'cast_object_vote'})

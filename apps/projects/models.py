@@ -38,18 +38,21 @@ class Project(models.Model):
         verbose_name=_("Author"))
     slug = models.SlugField()
 
+    @property
     def published_images(self):
         images = ProjectImage.objects.filter(
             project=self, 
             is_published=True).order_by('-is_primary')
         return images
 
+    @property
     def published_attachments(self):
         images = ProjectAttachment.objects.filter(
             project=self,
             is_published=True)
         return images
 
+    @property
     def published_links(self):
         links = ProjectLink.objects.filter(
             project=self,

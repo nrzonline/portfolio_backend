@@ -15,8 +15,6 @@ class ProjectImageInline(admin.TabularInline):
         'width',
         'height',
         'datetime_added',
-        'datetime_modified',
-        'slug',
     )
 
 
@@ -45,9 +43,6 @@ class ProjectLinkInline(admin.TabularInline):
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    class Meta:
-        model = Project
-
     exclude = (
         'datetime_added',
         'datetime_modified',
@@ -65,9 +60,6 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 class ProjectImageAdmin(admin.ModelAdmin):
-    class Meta:
-        model = ProjectImage
-
     exclude = (
         'width',
         'height',
@@ -85,9 +77,6 @@ class ProjectImageAdmin(admin.ModelAdmin):
 
 
 class ProjectAttachmentAdmin(admin.ModelAdmin):
-    class Meta:
-        model = ProjectAttachment
-
     exclude = (
         'datetime_added',
         'datetime_modified',
@@ -102,9 +91,6 @@ class ProjectAttachmentAdmin(admin.ModelAdmin):
 
 
 class ProjectLinkAdmin(admin.ModelAdmin):
-    class Meta:
-        model = ProjectLink
-
     exclude = (
         'datetime_added',
         'datetime_modified',)

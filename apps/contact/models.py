@@ -6,19 +6,15 @@ from django.utils.translation import ugettext as _
 
 
 class ContactMessage(models.Model):
-    first_name = models.CharField(
-        _("First name"),
-        max_length=50)
-    last_name = models.CharField(
-        _("Last name"),
-        max_length=50,
-        null=True, blank=True)
-    organisation = models.CharField(
+    name = models.CharField(
+        _("Name"),
+        max_length=255)
+    organization = models.CharField(
         _("Organisation name"),
         max_length=255,
         null=True, blank=True)
     email = models.EmailField(
-        _("Contact e-mail address"))
+        _("E-mail address"))
     phone_number = models.CharField(
         _("Phone number"),
         max_length=20,

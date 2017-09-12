@@ -11,6 +11,15 @@ class ContactMessageAdmin(admin.ModelAdmin):
     class Meta:
         model = ContactMessage
 
+    list_display = (
+        'datetime_submitted',
+        'subject',
+        'name',
+        'email',
+        'phone_number',
+        'organization',
+        'ip_address',
+    )
     exclude = ('ip_address',)
     form = ContactForm
 

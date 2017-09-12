@@ -1,6 +1,6 @@
 from rest_framework import viewsets, mixins, permissions
 
-from contact.serializers import ContactMessageSerializer
+from contact.serializers import ContactMessageSerializer, ContactMessageCustomErrorMessagesSerializer
 from utils.services import get_ip_address
 
 
@@ -11,3 +11,7 @@ class ContactMessageViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
     def perform_create(self, serializer):
         ip_address = get_ip_address(self.request)
         serializer.save(ip_address=ip_address)
+
+
+class ContactMessageCustomErrorMessagesViewSet(ContactMessageViewSet):
+    serializer_class = ContactMessageCustomErrorMessagesSerializer

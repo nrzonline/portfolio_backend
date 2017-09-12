@@ -1,12 +1,12 @@
 from datetime import datetime
 import factory
 
-from about.models import About
+from profiles.models import Profile
 
 
-class AboutDetailFactory(factory.DjangoModelFactory):
+class ProfileDetailFactory(factory.DjangoModelFactory):
     class Meta:
-        model = About
+        model = Profile
         django_get_or_create = ('first_name', )
 
     about = "About me..."

@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'contact',
     'projects',
     'skills',
-    'about',
+    'profiles',
     'resume',
     'votes',
     'statistics',
@@ -92,7 +92,7 @@ REST_FRAMEWORK = {
 }
 
 
-LANGUAGE_CODE = 'NL-nl'
+LANGUAGE_CODE = 'EN-us'
 TIME_ZONE = 'Europe/Amsterdam'
 TIME_ZONE_PYTZ = pytz.timezone(TIME_ZONE)
 USE_I18N = True

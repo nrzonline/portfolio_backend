@@ -7,20 +7,20 @@ from rest_framework import routers
 from projects.viewsets import ProjectViewSet
 from accounts.viewsets import AccountViewSet
 from skills.viewsets import SkillViewSet, SkillCategoryViewSet
-from contact.viewsets import ContactMessageViewSet
-from about.viewsets import AboutViewSet
+from contact.viewsets import ContactMessageCustomErrorMessagesViewSet
+from profiles.viewsets import ProfileViewSet
 from votes.viewsets import VoteViewSet
 from statistics.viewsets import RequestCountViewSet
 from resume.viewsets import WorkViewSet, EducationViewSet, InterestViewSet
 
 
 router = routers.DefaultRouter()
-router.register(r'account', AccountViewSet, base_name='accounts')
-router.register(r'project', ProjectViewSet, base_name='projects')
-router.register(r'skill', SkillViewSet, base_name='skills')
+router.register(r'account', AccountViewSet, base_name='account')
+router.register(r'project', ProjectViewSet, base_name='project')
+router.register(r'skill', SkillViewSet, base_name='skill')
 router.register(r'skill-category', SkillCategoryViewSet, base_name='categories')
-router.register(r'contact-message', ContactMessageViewSet, base_name='contact-messages')
-router.register(r'about', AboutViewSet, base_name='about')
+router.register(r'contact-message', ContactMessageCustomErrorMessagesViewSet, base_name='contact-message')
+router.register(r'profile', ProfileViewSet, base_name='profile')
 router.register(r'work', WorkViewSet, base_name='work')
 router.register(r'education', EducationViewSet, base_name='education')
 router.register(r'interest', InterestViewSet, base_name='interest')

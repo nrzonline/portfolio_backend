@@ -1,8 +1,9 @@
 .git/
+.idea/
 media/
 htmlcov/
-.idea/
 static/
+static_media/
 
 portfolio/settings/development.py
 portfolio/settings/secret.py

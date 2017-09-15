@@ -34,15 +34,15 @@ unique_request_count = RequestCountViewSet.as_view({'get': 'get_unique_request_c
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^%s/' % settings.API_PATH, include(router.urls)),
+    url(r'^', include(router.urls)),
 
-    url(r'^%s/vote/(?P<model>\w+)/(?P<object_id>\d+)/(?P<vote>\d+)/cast/$' % settings.API_PATH, cast_object_vote),
-    url(r'^%s/vote/(?P<model>\w+)/(?P<object_id>\d+)/$' % settings.API_PATH, get_object_votes),
+    url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/(?P<vote>\d+)/cast/$', cast_object_vote),
+    url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/$', get_object_votes),
 
-    url(r'^%s/request-count/unique/$' % settings.API_PATH, unique_request_count),
-    url(r'^%s/request-count/(?P<path>[-/a-z0-9]+)/unique/$' % settings.API_PATH, unique_request_count),
-    url(r'^%s/request-count/$' % settings.API_PATH, request_count),
-    url(r'^%s/request-count/(?P<path>[-/a-z0-9]+)/$' % settings.API_PATH, request_count),
+    url(r'^request-count/unique/$', unique_request_count),
+    url(r'^request-count/(?P<path>[-/a-z0-9]+)/unique/$', unique_request_count),
+    url(r'^request-count/$', request_count),
+    url(r'^request-count/(?P<path>[-/a-z0-9]+)/$', request_count),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

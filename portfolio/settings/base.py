@@ -9,7 +9,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 SECRET_KEY = secret.SECRET_KEY
-API_PATH = 'api'
 
 ALLOWED_HOSTS = ['*']
 
@@ -78,7 +77,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-CORS_URLS_REGEX = r'^/api/.*$'
+CORS_URLS_REGEX = r'^/.*$'
 CORS_ORIGIN_WHITELIST = (
     'localhost:8000',
     'localhost:8080',
@@ -91,6 +90,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+STATISTICS_IGNORE_MODULES = [
+    'admin',
+]
 
 LANGUAGE_CODE = 'EN-us'
 TIME_ZONE = 'Europe/Amsterdam'

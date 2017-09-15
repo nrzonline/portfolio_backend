@@ -19,6 +19,19 @@ DATABASES = {
     }
 }
 
+""" PRODUCTION SUGGESTIONS
+
+DEBUG = FALSE
+
 RAVEN_CONFIG = {
     'dsn': secret.SECRET_RAVEN_DNS,
 }
+
+REST_FRAMEWORK = settings.REST_FRAMEWORK + {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
+STATIC_ROOT = "/public_html/static/"
+"""

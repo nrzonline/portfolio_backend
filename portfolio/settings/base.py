@@ -77,12 +77,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-CORS_URLS_REGEX = r'^/.*$'
-CORS_ORIGIN_WHITELIST = (
-    'localhost:8000',
-    'localhost:8080',
-    'localhost'
-)
+# CORS_URLS_REGEX = r'^/.*$'
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:8000',
+#     'localhost:8080',
+#     'localhost'
+# )
+CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

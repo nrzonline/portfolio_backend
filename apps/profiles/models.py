@@ -61,6 +61,9 @@ class Profile(models.Model):
     github_url = models.URLField(
         _("GitHub Url"),
         null=True, blank=True)
+    is_published = models.BooleanField(
+        _("Profile published?"),
+        default=False)
     datetime_modified = models.DateTimeField(
         auto_now_add=True)
 

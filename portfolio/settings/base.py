@@ -77,12 +77,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# CORS_URLS_REGEX = r'^/.*$'
-# CORS_ORIGIN_WHITELIST = (
-#     'localhost:8000',
-#     'localhost:8080',
-#     'localhost'
-# )
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
@@ -107,4 +101,3 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-

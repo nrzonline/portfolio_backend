@@ -6,7 +6,7 @@ from rest_framework import routers
 
 from projects.viewsets import ProjectViewSet
 from accounts.viewsets import AccountViewSet
-from skills.viewsets import SkillViewSet, SkillCategoryViewSet
+from skills.viewsets import SkillViewSet, CategoryViewSet
 from contact.viewsets import ContactMessageCustomErrorMessagesViewSet
 from profiles.viewsets import ProfileViewSet
 from votes.viewsets import VoteViewSet
@@ -18,7 +18,7 @@ router = routers.DefaultRouter()
 router.register(r'account', AccountViewSet, base_name='account')
 router.register(r'project', ProjectViewSet, base_name='project')
 router.register(r'skill', SkillViewSet, base_name='skill')
-router.register(r'skill-category', SkillCategoryViewSet, base_name='categories')
+router.register(r'skill-category', CategoryViewSet, base_name='categories')
 router.register(r'contact-message', ContactMessageCustomErrorMessagesViewSet, base_name='contact-message')
 router.register(r'profile', ProfileViewSet, base_name='profile')
 router.register(r'work', WorkViewSet, base_name='work')

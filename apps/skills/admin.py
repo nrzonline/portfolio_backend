@@ -32,7 +32,7 @@ class SkillCategoryAdmin(admin.ModelAdmin):
         model = SkillCategory
 
     exclude = ('slug',)
-    list_display = ('title', 'frontend_position',)
+    list_display = ('title', 'frontend_position', 'is_published',)
 
 admin.site.register(SkillCategory, SkillCategoryAdmin)
 admin.site.register(Skill, SkillAdmin)

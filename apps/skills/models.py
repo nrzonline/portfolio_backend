@@ -75,6 +75,10 @@ class SkillCategory(models.Model):
     description = models.CharField(
         _("Description"),
         max_length=500)
+    is_published = models.BooleanField(
+        _("Is published?"),
+        default=False
+    )
     frontend_position = models.IntegerField(
         _("Position on frontend"))
     slug = models.SlugField()

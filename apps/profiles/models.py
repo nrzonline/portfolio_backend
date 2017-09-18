@@ -6,20 +6,42 @@ from django.db.models.signals import post_save
 from django.utils.text import ugettext_lazy as _
 from django.conf import settings
 
+from utils.services import unique_filename
+
+
+def profile_photo_upload_location(instance, filename):
+    filename = unique_filename(filename)
+    return 'uploads/projects/images/%s' % filename
+
 
 class Profile(models.Model):
     account = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
+    photo = models.ImageField(
+        _("Screenshot"),
+        width_field='width',
+        height_field='height',
+        upload_to=profile_photo_upload_location,
+        null=True, blank=True)
+    width = models.IntegerField(
+        _("Image width"),
+        null=True, blank=True)
+    height = models.IntegerField(
+        _("Image height"),
+        null=True, blank=True)
     about = models.TextField(
         verbose_name=_("About"),
-        max_length=10000)
+        max_length=10000,
+        null=True, blank=True)
     first_name = models.CharField(
         _("First name"),
-        max_length=50)
+        max_length=50,
+        null=True, blank=True)
     last_name = models.CharField(
         _("Last name"),
-        max_length=50)
+        max_length=50,
+        null=True, blank=True)
     date_of_birth = models.DateField(
         _("Date of birth"),
         null=True, blank=True)
@@ -68,7 +90,10 @@ class Profile(models.Model):
         auto_now_add=True)
 
     def __unicode__(self):
-        return self.first_name
+        if self.first_name:
+            return self.first_name
+        else:
+            return self.account.username
 
 
 def create_user_profile(sender, instance, created, **kwargs):

@@ -68,7 +68,7 @@ class Project(models.Model):
 
 def project_image_upload_location(instance, filename):
     filename = unique_filename(filename)
-    return 'uploads/projects/images/%s' % filename
+    return 'uploads/profile/images/%s' % filename
 
 
 class ProjectImage(models.Model):

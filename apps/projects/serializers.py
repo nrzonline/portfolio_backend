@@ -8,7 +8,7 @@ from skills.serializers import SkillSerializer
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectImage
-        exclude = ('is_published', 'project', 'datetime_added', 'datetime_modified', 'user', )
+        exclude = ('is_published', 'project', 'datetime_added', 'datetime_modified', 'user', 'is_primary',)
 
 
 class SimpleImageSerializer(serializers.ModelSerializer):
@@ -34,7 +34,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'title', 'slug', 'is_published', 'published_images',)
 
-    published_images = SimpleImageSerializer(read_only=True, many=True)
+    published_images = SimpleImageSerializer(many=True)
 
 
 class ProjectDetailSerializer(serializers.ModelSerializer):
@@ -42,7 +42,8 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
         model = Project
         exclude = ('user', 'is_published',)
 
-    skills = SkillSerializer(read_only=True, many=True)
-    published_images = ImageSerializer(read_only=True, many=True)
-    published_attachments = AttachmentSerializer(read_only=True, many=True)
-    published_links = LinkSerializer(read_only=True, many=True)
+    skills = SkillSerializer(many=True)
+    primary_image = ImageSerializer()
+    published_images = ImageSerializer(many=True)
+    published_attachments = AttachmentSerializer(many=True)
+    published_links = LinkSerializer(many=True)

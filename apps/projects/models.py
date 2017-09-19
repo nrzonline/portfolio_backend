@@ -39,6 +39,16 @@ class Project(models.Model):
     slug = models.SlugField()
 
     @property
+    def primary_image(self):
+        primary_image = ProjectImage.objects.filter(
+            project=self,
+            is_primary=True,
+        )
+        if primary_image:
+            return primary_image.last()
+        return None
+
+    @property
     def published_images(self):
         images = ProjectImage.objects.filter(
             project=self, 
@@ -68,7 +78,7 @@ class Project(models.Model):
 
 def project_image_upload_location(instance, filename):
     filename = unique_filename(filename)
-    return 'uploads/profile/images/%s' % filename
+    return 'uploads/projects/images/%s' % filename
 
 
 class ProjectImage(models.Model):

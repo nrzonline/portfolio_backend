@@ -6,7 +6,7 @@ from skills.models import Skill, SkillCategory
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SkillCategory
-        exclude = ()
+        exclude = ('is_published', )
 
 
 class SkillSerializer(serializers.ModelSerializer):

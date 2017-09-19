@@ -39,10 +39,10 @@ urlpatterns = [
     url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/(?P<vote>\d+)/cast/$', cast_object_vote),
     url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/$', get_object_votes),
 
-    url(r'^request-count/unique/$', unique_request_count),
-    url(r'^request-count/(?P<path>[-/a-z0-9]+)/unique/$', unique_request_count),
-    url(r'^request-count/$', request_count),
-    url(r'^request-count/(?P<path>[-/a-z0-9]+)/$', request_count),
+    url(r'^views/unique/$', unique_request_count),
+    url(r'^views/(?P<path>[-/a-z0-9]+)/unique/$', unique_request_count),
+    url(r'^views/$', request_count),
+    url(r'^views/(?P<path>[-/a-z0-9]+)/$', request_count),
 
 ]
 if settings.DEBUG:

@@ -85,7 +85,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-STATISTICS_IGNORE_MODULES = [
+STATISTICS_IGNORED_MODULES = [
     'admin',
 ]
 

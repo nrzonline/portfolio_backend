@@ -8,7 +8,7 @@ class ContactForm(forms.ModelForm):
         model = ContactMessage
         exclude = ('datetime_submitted', 'ip_address', )
 
-    first_name = forms.CharField(required=True)
+    name = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     subject = forms.CharField(required=True)
     message = forms.CharField(required=True, widget=forms.Textarea)

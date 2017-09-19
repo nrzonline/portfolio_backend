@@ -16,18 +16,19 @@ class TestContactForm(TestCase):
     def test_contact_form_with_filled_required_fields_is_valid(self):
         form_data = ContactMessageFactory.as_form_data()
         form = ContactForm(data=form_data)
+        print(form.errors)
         self.assertTrue(form.is_valid())
 
 
 class TestContactAPI(APITestCase):
     def test_contact_get_returns_405_method_not_allowed(self):
-        response = self.client.get('/api/contact-message/')
+        response = self.client.get('/contact-message/')
         self.assertEqual(response.status_code, 405)
 
     def test_contact_message_form_submit(self):
         contact_message_form_data = ContactMessageFactory.as_form_data()
         response = self.client.post(
-            '/api/contact-message/',
+            '/contact-message/',
             contact_message_form_data,
             format='json',
             **{

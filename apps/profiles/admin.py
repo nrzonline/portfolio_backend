@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django.utils.translation import ugettext as _
+from django import forms
+from django.db import models
 
 from profiles.models import Profile
 
@@ -14,6 +16,9 @@ class ProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('account',)
     list_display = ('account', 'first_name', 'last_name', 'email', 'phone_number', 'is_published',)
     exclude = ('width', 'height',)
+    formfield_overrides = {
+        models.TextField: {'widget': forms.Textarea(attrs={'rows': 10, 'cols': 120})}
+    }
 
     fieldsets = (
         (_('Account'), {
@@ -37,6 +42,11 @@ class ProfileAdmin(admin.ModelAdmin):
                 'nationality',
                 'location',
                 'occupation',
+            )
+        }),
+        (_('About'), {
+            'fields': (
+                'about',
             )
         }),
         (_('Social'), {

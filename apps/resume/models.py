@@ -15,6 +15,7 @@ class ResumeBase(models.Model):
     datetime_added = models.DateTimeField(_("Added on"), auto_now_add=True)
     datetime_modified = models.DateTimeField(_("Modified on"), null=True, blank=True)
     is_published = models.BooleanField("Is published?", default=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Submitted by"))
 
 
 def work_image_upload_to(instance, filename):
@@ -49,6 +50,9 @@ class Work(ResumeBase):
             return images
         return None
 
+    class Meta:
+        verbose_name = _("Work experience")
+
     def __str__(self):
         return self.title
 
@@ -64,8 +68,8 @@ class WorkImage(models.Model):
     height = models.IntegerField(_("Image height"), null=True)
     is_primary = models.BooleanField(_("Primary Image?"), default=False)
     is_published = models.BooleanField("Is published?", default=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Submitted by"))
     datetime_added = models.DateTimeField(_("Date added"), auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Submitted by"))
 
     def save(self, *args, **kwargs):
         self.handle_primary_work_image()

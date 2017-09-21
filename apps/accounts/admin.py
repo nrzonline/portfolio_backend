@@ -9,7 +9,9 @@ class PermissionAdmin(admin.ModelAdmin):
     class Meta:
         model = Permission
 
-    exclude = ()
+    exclude = (
+        'first_name',
+        'last_name')
     list_display = (
         'content_type',
         'codename',

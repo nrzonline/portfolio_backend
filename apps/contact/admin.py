@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.utils.translation import ugettext as _
 
 from contact.models import ContactMessage
 from contact.forms import ContactForm
@@ -22,6 +23,23 @@ class ContactMessageAdmin(admin.ModelAdmin):
     )
     exclude = ('ip_address',)
     form = ContactForm
+
+    fieldsets = (
+        (_('Contact details'), {
+            'fields': (
+                'name',
+                'email',
+                'phone_number',
+                'organization',
+            )
+        }),
+        (_('Message'), {
+            'fields': (
+                'subject',
+                'message',
+            )
+        }),
+    )
 
 
 admin.site.register(ContactMessage, ContactMessageAdmin)

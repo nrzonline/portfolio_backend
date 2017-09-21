@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.utils.text import ugettext_lazy as _
 from django.conf import settings
 
-from utils.services import unique_filename
+from core.services import unique_filename
 
 
 def profile_photo_upload_location(instance, filename):
@@ -89,7 +89,7 @@ class Profile(models.Model):
     datetime_modified = models.DateTimeField(
         auto_now_add=True)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.first_name:
             return self.first_name
         else:
@@ -104,5 +104,4 @@ def create_user_profile(sender, instance, created, **kwargs):
             last_name=instance.last_name,
             email=instance.email,
         )
-
 post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)

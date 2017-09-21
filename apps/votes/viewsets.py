@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from votes.serializers import VoteSerializer
 from votes.models import Vote, VOTE_CHOICES
 from votes import services
-from utils.services import get_ip_address
+from core.services import get_ip_address
 
 
 class VoteViewSet(viewsets.ViewSet):

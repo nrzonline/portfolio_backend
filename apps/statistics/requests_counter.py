@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db.models import F
 
 from statistics.models import RequestCount
-from utils.services import get_ip_address
+from core.services import get_ip_address
 
 
 class RequestTracker(object):

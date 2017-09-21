@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'resume',
     'votes',
     'statistics',
+    'core',
 ]
 
 MIDDLEWARE = [

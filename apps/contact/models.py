@@ -10,7 +10,7 @@ class ContactMessage(models.Model):
         _("Name"),
         max_length=255)
     organization = models.CharField(
-        _("Organisation name"),
+        _("Organization name"),
         max_length=255,
         null=True, blank=True)
     email = models.EmailField(

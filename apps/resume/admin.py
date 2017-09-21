@@ -7,26 +7,19 @@ from django.utils.translation import ugettext as _
 from resume.models import Work, WorkImage, Education, Interest
 
 
-class ResumeBaseAdmin(admin.ModelAdmin):
-    exclude = (
-        'datetime_added',
-        'datetime_modified',
-        'user',
-    )
-
-
 class WorkImageInline(admin.TabularInline):
     model = WorkImage
     extra = 0
-    exclude = (
-        'width',
-        'height',
-        'datetime_added',
-        'user',
+    fields = (
+        'title',
+        'description',
+        'image',
+        'is_primary',
+        'is_published',
     )
 
 
-class WorkAdmin(ResumeBaseAdmin):
+class WorkAdmin(admin.ModelAdmin):
     exclude = (
         'width',
         'height',
@@ -37,11 +30,15 @@ class WorkAdmin(ResumeBaseAdmin):
         'organization_image',
         'date_from',
         'date_till',
+        'is_published',
     )
     readonly_fields = (
-        'datetime_added',
+        'published_by',
+        'datetime_published',
+        'created_by',
+        'datetime_created',
+        'modified_by',
         'datetime_modified',
-        'user',
     )
     inlines = [
         WorkImageInline,
@@ -64,15 +61,17 @@ class WorkAdmin(ResumeBaseAdmin):
         (_('Content'), {
             'fields': (
                 'title',
-                'short_description',
-                'long_description',
+                'description',
+                'content',
             )
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
+                'created_by',
+                'datetime_created',
+                'modified_by',
                 'datetime_modified',
-                'user',
+                'datetime_published',
             )
         }),
     )
@@ -82,17 +81,22 @@ class WorkAdmin(ResumeBaseAdmin):
         super(WorkAdmin, self).save_model(request, obj, form, change)
 
 
-class EducationAdmin(ResumeBaseAdmin):
+class EducationAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'date_from',
         'date_till',
+        'datetime_created',
+        'datetime_modified',
         'is_published',
     )
     readonly_fields = (
-        'datetime_added',
+        'published_by',
+        'datetime_published',
+        'created_by',
+        'datetime_created',
+        'modified_by',
         'datetime_modified',
-        'user',
     )
 
     fieldsets = (
@@ -110,40 +114,85 @@ class EducationAdmin(ResumeBaseAdmin):
         (_('Content'), {
             'fields': (
                 'title',
-                'short_description',
-                'long_description',
+                'description',
+                'content',
             )
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
+                'created_by',
+                'datetime_created',
+                'modified_by',
                 'datetime_modified',
-                'user',
+                'datetime_published',
             )
         }),
     )
 
 
-class InterestAdmin(ResumeBaseAdmin):
+class InterestAdmin(admin.ModelAdmin):
     list_display = (
         'title',
+        'is_published',
+        'datetime_created',
+        'datetime_modified',
+        'is_published',
+    )
+    readonly_fields = (
+        'published_by',
+        'datetime_published',
+        'created_by',
+        'datetime_created',
+        'modified_by',
+        'datetime_modified',
+    )
+
+    fieldsets = (
+        (_('Publish'), {
+            'fields': (
+                'is_published',
+            )
+        }),
+        (_('Content'), {
+            'fields': (
+                'title',
+                'description',
+                'content',
+            )
+        }),
+        (_('Information'), {
+            'fields': (
+                'created_by',
+                'datetime_created',
+                'modified_by',
+                'datetime_modified',
+                'datetime_published',
+            )
+        }),
     )
 
 
 class WorkImageAdmin(admin.ModelAdmin):
     list_display = (
         'work',
+        'image',
         'is_primary',
+        'datetime_created',
+        'datetime_modified',
         'is_published',
     )
     exclude = (
         'width',
         'height',
-        'user',
+        'created_by',
     )
     readonly_fields = (
-        'datetime_added',
-        'user',
+        'published_by',
+        'datetime_published',
+        'created_by',
+        'datetime_created',
+        'modified_by',
+        'datetime_modified',
     )
 
     fieldsets = (
@@ -161,8 +210,11 @@ class WorkImageAdmin(admin.ModelAdmin):
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
-                'user',
+                'created_by',
+                'datetime_created',
+                'modified_by',
+                'datetime_modified',
+                'datetime_published',
             )
         }),
     )

@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins, permissions
 
 from contact.serializers import ContactMessageSerializer, ContactMessageCustomErrorMessagesSerializer
-from utils.services import get_ip_address
+from core.services import get_ip_address
 
 
 class ContactMessageViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):

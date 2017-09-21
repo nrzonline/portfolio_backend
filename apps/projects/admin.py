@@ -4,22 +4,20 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 
-from projects.models import (
-    Project, ProjectImage, ProjectAttachment, ProjectLink)
-from utils.admin.options import ModelAdminSaveUserOnCreate
+from projects.models import Project, ProjectImage, ProjectAttachment, ProjectLink
+from core.admin.options import ModelAdminSaveUserOnCreate
 
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
     fk_name = 'project'
     extra = 0
-    exclude = (
-        'width',
-        'height',
-        'datetime_added',
-        'datetime_modified',
-        'slug',
-        'user',
+    fields = (
+        'title',
+        'description',
+        'image',
+        'is_primary',
+        'is_published',
     )
 
 
@@ -27,11 +25,11 @@ class ProjectAttachmentInline(admin.TabularInline):
     model = ProjectAttachment
     fk_name = 'project'
     extra = 0
-    exclude = (
-        'datetime_added',
-        'datetime_modified',
-        'slug',
-        'user',
+    fields = (
+        'title',
+        'description',
+        'file',
+        'is_published',
     )
 
 
@@ -39,30 +37,35 @@ class ProjectLinkInline(admin.TabularInline):
     model = ProjectLink
     fk_name = 'project'
     extra = 0
-    exclude = (
-        'datetime_added',
-        'datetime_modified',
-        'user',
+    fields = (
+        'title',
+        'description',
+        'url',
+        'is_published',
     )
 
 
 class ProjectAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     exclude = (
-        'datetime_added',
+        'datetime_created',
         'datetime_modified',
         'slug',
     )
     list_display = (
         'title',
-        'is_published',
-        'datetime_added',
+        'datetime_created',
         'datetime_modified',
+        'created_by',
+        'is_published',
     )
     readonly_fields = (
-        'datetime_added',
+        'published_by',
+        'datetime_published',
+        'created_by',
+        'datetime_created',
+        'modified_by',
         'datetime_modified',
         'slug',
-        'user',
     )
     filter_horizontal = (
         'skills',
@@ -82,17 +85,19 @@ class ProjectAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
         (_('Project details'), {
             'fields': (
                 'title',
-                'short_description',
-                'full_description',
+                'description',
+                'content',
                 'skills',
             )
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
+                'created_by',
+                'datetime_created',
+                'modified_by',
                 'datetime_modified',
+                'datetime_published',
                 'slug',
-                'user',
             )
         }),
     )
@@ -102,7 +107,7 @@ class ProjectImageAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     exclude = (
         'width',
         'height',
-        'datetime_added',
+        'datetime_created',
         'datetime_modified',
         'slug',
     )
@@ -114,10 +119,12 @@ class ProjectImageAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
         'is_published',
     )
     readonly_fields = (
-        'datetime_added',
+        'created_by',
+        'datetime_created',
+        'modified_by',
         'datetime_modified',
+        'datetime_published',
         'slug',
-        'user',
     )
 
     fieldsets = (
@@ -137,10 +144,12 @@ class ProjectImageAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
+                'created_by',
+                'datetime_created',
+                'modified_by',
                 'datetime_modified',
+                'datetime_published',
                 'slug',
-                'user',
             )
         }),
     )
@@ -148,27 +157,34 @@ class ProjectImageAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
 
 class ProjectAttachmentAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     exclude = (
-        'datetime_added',
+        'datetime_created',
         'datetime_modified',
-        'user',
+        'created_by',
         'slug',
     )
     list_display = (
-        'title',
         'project',
+        'title',
         'file',
-        'is_published',
-        'datetime_added',
+        'datetime_created',
         'datetime_modified',
+        'is_published',
     )
     readonly_fields = (
-        'datetime_added',
+        'created_by',
+        'datetime_created',
+        'modified_by',
         'datetime_modified',
+        'datetime_published',
         'slug',
-        'user',
     )
 
     fieldsets = (
+        (_('Publish'), {
+            'fields': (
+                'is_published',
+            )
+        }),
         (_('Attachment details'), {
             'fields': (
                 'project',
@@ -179,10 +195,12 @@ class ProjectAttachmentAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
+                'created_by',
+                'datetime_created',
+                'modified_by',
                 'datetime_modified',
+                'datetime_published',
                 'slug',
-                'user',
             )
         }),
     )
@@ -190,38 +208,48 @@ class ProjectAttachmentAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
 
 class ProjectLinkAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     exclude = (
-        'datetime_added',
+        'datetime_created',
         'datetime_modified',
-        'user',
+        'created_by',
     )
     list_display = (
-        'title',
         'project',
+        'title',
         'url',
-        'is_published',
-        'datetime_added',
+        'description',
+        'datetime_created',
         'datetime_modified',
+        'is_published',
     )
     readonly_fields = (
-        'datetime_added',
+        'created_by',
+        'datetime_created',
+        'modified_by',
         'datetime_modified',
-        'user',
+        'datetime_published',
     )
 
     fieldsets = (
+        (_('Publish'), {
+            'fields': (
+                'is_published',
+            )
+        }),
         (_('Attachment details'), {
             'fields': (
                 'project',
                 'title',
-                'file',
                 'description',
+                'url',
             )
         }),
         (_('Information'), {
             'fields': (
-                'datetime_added',
+                'created_by',
+                'datetime_created',
+                'modified_by',
                 'datetime_modified',
-                'user',
+                'datetime_published',
             )
         }),
     )

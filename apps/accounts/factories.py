@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 import factory
 
-from utils.services import random_string
+from core.services import random_string
 
 
 class UserFactory(factory.DjangoModelFactory):

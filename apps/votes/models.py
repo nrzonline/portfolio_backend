@@ -25,4 +25,8 @@ class Vote(models.Model):
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
-        unique_together = ('content_type', 'object_id', 'ip_address',)
+        unique_together = (
+            'content_type',
+            'object_id',
+            'ip_address',
+        )

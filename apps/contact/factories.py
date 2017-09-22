@@ -9,7 +9,7 @@ class ContactMessageFactory(factory.DjangoModelFactory):
         model = ContactMessage
 
     name = "My name"
-    organisation = "Organization"
+    organization = "Organization"
     email = "test@portfolio-test.com"
     phone_number = "06-12345678"
     subject = "Subject"

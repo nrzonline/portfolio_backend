@@ -6,11 +6,19 @@ from skills.models import Skill, SkillCategory
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SkillCategory
-        exclude = ('is_published', )
+        exclude = ()
 
 
 class SkillSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+
     class Meta:
         model = Skill
-        exclude = ('width', 'height', 'is_published',)
+        exclude = (
+            'width',
+            'height',
+        )
 
+
+class FlatSkillSerializer(SkillSerializer):
+    category = None

@@ -7,4 +7,3 @@ from profiles.serializers import ProfileSerializer
 class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
-

@@ -17,9 +17,9 @@ class SkillFactory(factory.DjangoModelFactory):
         model = Skill
         django_get_or_create = ('title', )
 
-    title = "Skill title"
-    short_description = "Short description"
-    full_description = "Full description"
+    title = "Title"
+    description = "Description"
+    content = "Content body"
     category = factory.SubFactory(SkillCategoryFactory)
     level_max = 5
     level = 5

@@ -9,8 +9,7 @@ portfolio/settings/development.py
 portfolio/settings/secret.py
 portfolio/settings/load.py
 
-db.sqlite3
-db.sqlite3.bu
+*.sqlite3
 *.pyc
 .coverage
 deploy.tar.gz

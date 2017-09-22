@@ -6,4 +6,9 @@ from profiles.models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        exclude = ('phone_number', 'email',)
+        exclude = (
+            'phone_number',
+            'email',
+            'width',
+            'height',
+        )

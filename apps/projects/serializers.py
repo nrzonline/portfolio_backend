@@ -2,19 +2,26 @@ from rest_framework import serializers
 
 from projects.models import (
      Project, ProjectAttachment, ProjectImage, ProjectLink)
-from skills.serializers import SkillSerializer
+from skills.serializers import FlatSkillSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectImage
-        exclude = ('is_published', 'project', 'datetime_added', 'datetime_modified', 'user', 'is_primary',)
+        exclude = (
+            'width',
+            'height',
+        )
 
 
 class SimpleImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectImage
-        fields = ('id', 'title', 'image',)
+        fields = (
+            'id',
+            'title',
+            'image',
+        )
 
 
 class AttachmentSerializer(serializers.ModelSerializer):
@@ -32,7 +39,11 @@ class LinkSerializer(serializers.ModelSerializer):
 class ProjectListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('id', 'title', 'slug', 'is_published', 'published_images',)
+        exclude = (
+            'description',
+            'content',
+            'url',
+        )
 
     published_images = SimpleImageSerializer(many=True)
 
@@ -40,9 +51,9 @@ class ProjectListSerializer(serializers.ModelSerializer):
 class ProjectDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        exclude = ('user', 'is_published',)
+        exclude = ()
 
-    skills = SkillSerializer(many=True)
+    skills = FlatSkillSerializer(many=True)
     primary_image = ImageSerializer()
     published_images = ImageSerializer(many=True)
     published_attachments = AttachmentSerializer(many=True)

@@ -6,7 +6,7 @@ from django.test import TestCase
 from core import services
 
 
-class TestUtilities(TestCase):
+class TestServices(TestCase):
     def test_random_string(self):
         random_string = services.random_string(15)
         self.assertEqual(len(random_string), 15)

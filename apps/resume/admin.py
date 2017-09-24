@@ -40,9 +40,6 @@ class WorkAdmin(admin.ModelAdmin):
         'modified_by',
         'datetime_modified',
     )
-    inlines = [
-        WorkImageInline,
-    ]
 
     fieldsets = (
         (_('Publish'), {
@@ -77,8 +74,9 @@ class WorkAdmin(admin.ModelAdmin):
     )
 
     def save_model(self, request, obj, form, change):
-        obj.user = request.user
-        super(WorkAdmin, self).save_model(request, obj, form, change)
+        obj.created_by = request.user
+        obj.request = request
+        return super(WorkAdmin, self).save_model(request, obj, form, change)
 
 
 class EducationAdmin(admin.ModelAdmin):

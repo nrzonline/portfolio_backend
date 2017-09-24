@@ -26,7 +26,10 @@ class AuditMixin(models.Model):
     def save(self, *args, **kwargs):
         if self.id:
             self.datetime_modified = datetime.now()
-            return super(AuditMixin, self).save(*args, **kwargs)
+            self.modified_by = self.request.user
+        else:
+            self.created_by = self.request.user
+        return super(AuditMixin, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True
@@ -38,6 +41,11 @@ class PublishMixin(models.Model):
     published_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("First published by"),
                                      related_name="%(app_label)s_%(class)s_publish_related",
                                      null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.is_published and not self.datetime_published:
+            self.datetime_published = datetime.now()
+        return super(PublishMixin, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True

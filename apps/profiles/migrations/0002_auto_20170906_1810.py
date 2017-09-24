@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Profile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('about', models.TextField(max_length=10000, verbose_name='About')),
+                ('projects', models.TextField(max_length=10000, verbose_name='About')),
                 ('first_name', models.CharField(max_length=50, verbose_name='First name')),
                 ('last_name', models.CharField(max_length=50, verbose_name='Last name')),
                 ('date_of_birth', models.DateField(blank=True, null=True, verbose_name='Date of birth')),

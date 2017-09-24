@@ -11,8 +11,8 @@ class ProjectFactory(factory.DjangoModelFactory):
         django_get_or_create = ('title', )
 
     title = "Title"
-    short_description = "Short description"
-    full_description = "Full description"
+    description = "Description"
+    content = "Content"
     url = "http://test-portfolio.com"
     is_published = True
     user = factory.SubFactory(UserFactory)
@@ -26,7 +26,7 @@ class ProjectImageFactory(factory.DjangoModelFactory):
     title = "Title"
     description = "Description"
     image = factory.django.ImageField()
-    user = factory.SubFactory(UserFactory)
+    created_by = factory.SubFactory(UserFactory)
     is_primary = True
     is_published = True
 
@@ -39,7 +39,7 @@ class ProjectAttachmentFactory(factory.DjangoModelFactory):
     title = "Title"
     description = "Description"
     file = factory.django.FileField()
-    user = factory.SubFactory(UserFactory)
+    created_by = factory.SubFactory(UserFactory)
     is_published = True
 
 
@@ -52,4 +52,4 @@ class ProjectLinkFactory(factory.DjangoModelFactory):
     description = "Description"
     url = 'http://test-portfolio.com'
     is_published = True
-    user = factory.SubFactory(UserFactory)
+    created_by = factory.SubFactory(UserFactory)

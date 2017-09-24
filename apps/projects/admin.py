@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext as _
 
 from projects.models import Project, ProjectImage, ProjectAttachment, ProjectLink
-from core.admin.options import ModelAdminSaveUserOnCreate
+from core.admin.options import ModelAdminSetCreatedByOnCreate
 
 
 class ProjectImageInline(admin.TabularInline):
@@ -45,7 +45,7 @@ class ProjectLinkInline(admin.TabularInline):
     )
 
 
-class ProjectAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
+class ProjectAdmin(ModelAdminSetCreatedByOnCreate, admin.ModelAdmin):
     exclude = (
         'datetime_created',
         'datetime_modified',
@@ -103,7 +103,7 @@ class ProjectAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     )
 
 
-class ProjectImageAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
+class ProjectImageAdmin(ModelAdminSetCreatedByOnCreate, admin.ModelAdmin):
     exclude = (
         'width',
         'height',
@@ -155,7 +155,7 @@ class ProjectImageAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     )
 
 
-class ProjectAttachmentAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
+class ProjectAttachmentAdmin(ModelAdminSetCreatedByOnCreate, admin.ModelAdmin):
     exclude = (
         'datetime_created',
         'datetime_modified',
@@ -206,7 +206,7 @@ class ProjectAttachmentAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
     )
 
 
-class ProjectLinkAdmin(ModelAdminSaveUserOnCreate, admin.ModelAdmin):
+class ProjectLinkAdmin(ModelAdminSetCreatedByOnCreate, admin.ModelAdmin):
     exclude = (
         'datetime_created',
         'datetime_modified',

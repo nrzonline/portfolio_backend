@@ -2,7 +2,7 @@ from django.contrib.admin.options import ModelAdmin
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class ModelAdminSaveUserOnCreate(ModelAdmin):
+class ModelAdminSetCreatedByOnCreate(ModelAdmin):
     """
         This mixin should be used to automatically save request.user
         to the model's user field. Throws FieldDoesNotExist
@@ -10,7 +10,7 @@ class ModelAdminSaveUserOnCreate(ModelAdmin):
     """
 
     def __init__(self, *args, **kwargs):
-        super(ModelAdminSaveUserOnCreate, self).__init__(*args, **kwargs)
+        super(ModelAdminSetCreatedByOnCreate, self).__init__(*args, **kwargs)
 
     """
         Setting the user field of the model when creating a new object if
@@ -18,8 +18,8 @@ class ModelAdminSaveUserOnCreate(ModelAdmin):
     """
     def save_model(self, request, obj, form, change):
         if not change:
-            if obj._meta.get_field('user'):
-                obj.user = request.user
+            if obj._meta.get_field('created_by'):
+                obj.created_by = request.user
                 obj.save()
 
     """
@@ -30,14 +30,14 @@ class ModelAdminSaveUserOnCreate(ModelAdmin):
     def save_formset(self, request, form, formset, change):
         for iteration_form in formset.forms:
             obj = iteration_form.instance
-            if obj._meta.get_field('user'):
+            if obj._meta.get_field('created_by'):
 
                 # Make sure the user is only set when the object is new
                 try:
-                    if obj.user:
+                    if obj.created_by:
                         pass
                 except ObjectDoesNotExist:
-                    obj.user = request.user
+                    obj.created_by = request.user
         formset.save()
 
 

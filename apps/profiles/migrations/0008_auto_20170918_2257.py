@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='profile',
-            name='about',
+            name='projects',
             field=models.TextField(blank=True, max_length=10000, null=True, verbose_name='About'),
         ),
         migrations.AlterField(

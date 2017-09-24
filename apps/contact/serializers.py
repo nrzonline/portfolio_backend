@@ -28,7 +28,7 @@ class ContactMessageCustomErrorMessagesSerializer(serializers.ModelSerializer):
             },
             'subject': {
                 'error_messages': {
-                    'required': _("Please give me a small heads-up about the content"),
+                    'required': _("Please give me a small heads-up projects the content"),
                 }
             },
             'message': {

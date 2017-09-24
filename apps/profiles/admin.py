@@ -46,7 +46,7 @@ class ProfileAdmin(admin.ModelAdmin):
         }),
         (_('About'), {
             'fields': (
-                'projects',
+                'about',
             )
         }),
         (_('Social'), {

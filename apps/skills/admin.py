@@ -60,6 +60,11 @@ class SkillAdmin(admin.ModelAdmin):
         }),
     )
 
+    def save_model(self, request, obj, form, change):
+        obj.created_by = request.user
+        obj.request = request
+        return super(SkillAdmin, self).save_model(request, obj, form, change)
+
 
 class SkillCategoryAdmin(admin.ModelAdmin):
     exclude = (
@@ -87,6 +92,11 @@ class SkillCategoryAdmin(admin.ModelAdmin):
             )
         }),
     )
+
+    def save_model(self, request, obj, form, change):
+        obj.created_by = request.user
+        obj.request = request
+        return super(SkillCategoryAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(SkillCategory, SkillCategoryAdmin)
 admin.site.register(Skill, SkillAdmin)

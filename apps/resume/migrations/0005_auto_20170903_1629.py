@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='work',
             name='organization_image',
-            field=models.ImageField(blank=True, height_field='height', null=True, upload_to=resume.models.work_image_upload_to, verbose_name='Organization logo', width_field='width'),
+            field=models.ImageField(blank=True, height_field='height', null=True, upload_to=resume.models.work_image_upload_location, verbose_name='Organization logo', width_field='width'),
         ),
         migrations.AddField(
             model_name='work',

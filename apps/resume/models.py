@@ -12,14 +12,15 @@ class ResumeBase(ContentMixin, AuditMixin, PublishMixin):
     pass
 
 
-def work_image_upload_to(instance, filename):
+def work_image_upload_location(instance, filename):
     filename = unique_filename(filename)
     return 'uploads/resume/images/%s' % filename
 
 
 class Work(ResumeBase):
     organization = models.CharField(_("Organization"), max_length=255)
-    organization_image = models.ImageField(_("Organization logo"), upload_to=work_image_upload_to,
+    organization_image = models.ImageField(_("Organization logo"),
+                                           upload_to=work_image_upload_location,
                                            width_field='width', height_field='height',
                                            null=True, blank=True)
     width = models.IntegerField(_("Image width"), null=True)
@@ -52,7 +53,7 @@ class WorkImage(AuditMixin, PublishMixin):
     work = models.ForeignKey('Work')
     title = models.CharField(_("Image name"), max_length=50)
     description = models.CharField(_("Description"), max_length=1500)
-    image = models.ImageField(_("Image"), upload_to=work_image_upload_to,
+    image = models.ImageField(_("Image"), upload_to=work_image_upload_location,
                               width_field='width', height_field='height')
     width = models.IntegerField(_("Image width"), null=True)
     height = models.IntegerField(_("Image height"), null=True)

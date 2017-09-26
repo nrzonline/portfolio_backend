@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='WorkImage',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, height_field='height', null=True, upload_to=resume.models.work_image_upload_to, verbose_name='Image', width_field='width')),
+                ('image', models.ImageField(blank=True, height_field='height', null=True, upload_to=resume.models.work_image_upload_location, verbose_name='Image', width_field='width')),
                 ('width', models.IntegerField(null=True, verbose_name='Image width')),
                 ('height', models.IntegerField(null=True, verbose_name='Image height')),
                 ('is_published', models.BooleanField(default=False, verbose_name='Is published?')),

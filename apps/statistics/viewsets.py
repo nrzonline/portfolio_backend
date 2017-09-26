@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from django.db.models import Sum
 
-from statistics.requests_counter import RequestCount
+from statistics.request_tracker import RequestCount
 from statistics.serializers import RequestCountSerializer
 
 

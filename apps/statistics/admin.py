@@ -11,7 +11,7 @@ class RequestCountAdmin(admin.ModelAdmin):
         model = RequestCount
 
     exclude = ()
-    list_display = ('module', 'path', 'ip_address', 'count', 'datetime',)
+    list_display = ('module', 'path', 'ip_address', 'hit_count', 'datetime',)
 
 admin.site.register(RequestCount, RequestCountAdmin)
 

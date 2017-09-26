@@ -2,7 +2,7 @@ from django.contrib.admin.options import ModelAdmin
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class ModelAdminSetCreatedByOnCreate(ModelAdmin):
+class ModelAdminSetAuditMixin(ModelAdmin):
     """
         This mixin should be used to automatically save request.user
         to the model's user field. Throws FieldDoesNotExist
@@ -10,17 +10,19 @@ class ModelAdminSetCreatedByOnCreate(ModelAdmin):
     """
 
     def __init__(self, *args, **kwargs):
-        super(ModelAdminSetCreatedByOnCreate, self).__init__(*args, **kwargs)
+        super(ModelAdminSetAuditMixin, self).__init__(*args, **kwargs)
 
     """
         Setting the user field of the model when creating a new object if
         the user field is available.
     """
     def save_model(self, request, obj, form, change):
-        if not change:
-            if obj._meta.get_field('created_by'):
+        if obj._meta.get_field('created_by'):
+            if not change:
                 obj.created_by = request.user
-                obj.save()
+            else:
+                obj.modified_by = request.user
+            obj.save()
 
     """
         Setting the user field of the admin Inline formsets their models,

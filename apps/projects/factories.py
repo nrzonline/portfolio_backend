@@ -1,6 +1,6 @@
 import factory
 
-from accounts.factories import UserFactory
+from users.factories import UserFactory
 from projects.models import Project, ProjectImage, ProjectAttachment, \
     ProjectLink
 
@@ -15,7 +15,7 @@ class ProjectFactory(factory.DjangoModelFactory):
     content = "Content"
     url = "http://test-portfolio.com"
     is_published = True
-    user = factory.SubFactory(UserFactory)
+    created_by = factory.SubFactory(UserFactory)
 
 
 class ProjectImageFactory(factory.DjangoModelFactory):
@@ -26,9 +26,9 @@ class ProjectImageFactory(factory.DjangoModelFactory):
     title = "Title"
     description = "Description"
     image = factory.django.ImageField()
-    created_by = factory.SubFactory(UserFactory)
     is_primary = True
     is_published = True
+    created_by = factory.SubFactory(UserFactory)
 
 
 class ProjectAttachmentFactory(factory.DjangoModelFactory):
@@ -39,8 +39,8 @@ class ProjectAttachmentFactory(factory.DjangoModelFactory):
     title = "Title"
     description = "Description"
     file = factory.django.FileField()
-    created_by = factory.SubFactory(UserFactory)
     is_published = True
+    created_by = factory.SubFactory(UserFactory)
 
 
 class ProjectLinkFactory(factory.DjangoModelFactory):

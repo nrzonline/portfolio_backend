@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
 from django.utils.text import ugettext_lazy as _
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from core.services import unique_filename
 
@@ -48,6 +50,7 @@ class Profile(models.Model):
             return self.account.username
 
 
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(
@@ -56,4 +59,3 @@ def create_user_profile(sender, instance, created, **kwargs):
             last_name=instance.last_name,
             email=instance.email,
         )
-post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)

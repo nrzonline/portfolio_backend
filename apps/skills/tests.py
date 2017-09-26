@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.test import TestCase, override_settings
+from django.test import TestCase, RequestFactory, override_settings
 import tempfile
 
+from users.factories import UserFactory
 from skills.factories import SkillFactory, SkillCategoryFactory
 from skills.models import skill_image_upload_location
 

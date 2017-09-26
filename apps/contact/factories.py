@@ -20,7 +20,7 @@ class ContactMessageFactory(factory.DjangoModelFactory):
     def as_form_data(cls, **kwargs):
         data = {
             'name': cls.name,
-            'organization': cls.organisation,
+            'organization': cls.organization,
             'email': cls.email,
             'phone_number': cls.phone_number,
             'subject': cls.subject,

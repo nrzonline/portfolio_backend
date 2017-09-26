@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 
 from projects.viewsets import ProjectViewSet
-from accounts.viewsets import AccountViewSet
+from users.viewsets import AccountViewSet
 from skills.viewsets import SkillViewSet, CategoryViewSet
 from contact.viewsets import ContactMessageCustomErrorMessagesViewSet
 from profiles.viewsets import ProfileViewSet
@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(router.urls)),
 
-    url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/(?P<vote>\d+)/cast/$', cast_object_vote),
+    url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/(?P<vote_value>\d+)/cast/$', cast_object_vote),
     url(r'^vote/(?P<model>\w+)/(?P<object_id>\d+)/$', get_object_votes),
 
     url(r'^views/unique/$', unique_request_count),

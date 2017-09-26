@@ -1,5 +1,6 @@
 import factory
 
+from users.factories import UserFactory
 from skills.models import Skill, SkillCategory
 
 
@@ -9,7 +10,8 @@ class SkillCategoryFactory(factory.DjangoModelFactory):
 
     title = "Title"
     description = "Description"
-    frontend_position = 1
+    position = 1
+    created_by = factory.SubFactory(UserFactory)
 
 
 class SkillFactory(factory.DjangoModelFactory):
@@ -21,7 +23,8 @@ class SkillFactory(factory.DjangoModelFactory):
     description = "Description"
     content = "Content body"
     category = factory.SubFactory(SkillCategoryFactory)
-    level_max = 5
-    level = 5
+    level_max = 10
+    level = 8
     is_published = True
     image = factory.django.ImageField()
+    created_by = factory.SubFactory(UserFactory)

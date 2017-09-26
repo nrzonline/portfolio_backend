@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='workimage',
             name='image',
-            field=models.ImageField(default='asdf', height_field='height', upload_to=resume.models.work_image_upload_to, verbose_name='Image', width_field='width'),
+            field=models.ImageField(default='asdf', height_field='height', upload_to=resume.models.work_image_upload_location, verbose_name='Image', width_field='width'),
             preserve_default=False,
         ),
     ]

@@ -15,7 +15,7 @@ def skill_image_upload_location(instance, filename):
 
 class Skill(ContentMixin, AuditMixin, PublishMixin, SlugifyMixin):
     category = models.ForeignKey('skills.SkillCategory')
-    level_max = models.IntegerField(_("Level caps"), default=5)
+    level_max = models.IntegerField(_("Level caps"), default=10)
     level = models.IntegerField(_("Current skill level"))
     image = models.ImageField(_("Image"), upload_to=skill_image_upload_location,
                               width_field='width', height_field='height',

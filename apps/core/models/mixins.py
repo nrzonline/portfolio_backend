@@ -26,9 +26,6 @@ class AuditMixin(models.Model):
     def save(self, *args, **kwargs):
         if self.id:
             self.datetime_modified = datetime.now()
-            self.modified_by = self.request.user
-        else:
-            self.created_by = self.request.user
         return super(AuditMixin, self).save(*args, **kwargs)
 
     class Meta:

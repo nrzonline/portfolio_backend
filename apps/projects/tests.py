@@ -10,15 +10,14 @@ from projects.factories import (
 from projects.models import (
      ProjectImage, project_image_upload_location, project_attachment_upload_location)
 
-
 TEMP_MEDIA_ROOT = tempfile.mkdtemp()
 
 
 class TestProjectModel(TestCase):
-    def test_project_unique_project_title(self):
+    def test_project_unique_title(self):
         project_a = ProjectFactory.create()
-        project_b = ProjectFactory.build()
-        project_b.name = project_a.title
+        project_b = ProjectFactory.create(title="other title")
+        project_b.title = project_a.title
 
         with self.assertRaises(IntegrityError):
             project_b.save()
@@ -44,27 +43,25 @@ class TestProjectImageModel(TestCase):
         filename = "filename.jpg"
         upload_location = project_image_upload_location(None, filename)
 
-        self.assertTrue(upload_location.startswith(
-            'uploads/projects/images/'))
+        self.assertTrue(upload_location.startswith('uploads/projects/images/'))
 
     def test_first_project_image_always_primary(self):
         project_image = ProjectImageFactory.create()
-        project_image.title = "project_image"
+        project_image.title = "project image"
         project_image.is_primary = False
         project_image.save()
 
-        project_image = ProjectImage.objects.get(title="project_image")
+        project_image = ProjectImage.objects.get(title="project image")
         self.assertTrue(project_image.is_primary)
 
     def test_project_image_unset_previous_primary(self):
-        project_image_a = ProjectImageFactory.create()
-        project_image_a.title = "project_image_a"
-        project_image_a.save()
-        ProjectImageFactory.create()
+        project_image = ProjectImageFactory.create()
+        project_image.title = "project image"
+        project_image.save()
+        ProjectImageFactory.create(is_primary=True)
 
-        project_image_a = ProjectImage.objects.get(
-            title="project_image_a")
-        self.assertFalse(project_image_a.is_primary)
+        project_image = ProjectImage.objects.get(title="project image")
+        self.assertFalse(project_image.is_primary)
 
     def test_project_image_datetime_modified_on_update(self):
         project_image = ProjectImageFactory.create()
@@ -87,8 +84,7 @@ class TestProjectAttachmentModel(TestCase):
         filename = "attachment.pdf"
         upload_location = project_attachment_upload_location(None, filename)
 
-        self.assertTrue(upload_location.startswith(
-            'uploads/projects/attachments/'))
+        self.assertTrue(upload_location.startswith('uploads/projects/attachments/'))
 
     def test_project_attachment_datetime_modified_on_update(self):
         project_attachment = ProjectAttachmentFactory.create()

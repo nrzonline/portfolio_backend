@@ -5,10 +5,10 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from core.services import unique_filename
-from core.models.mixins import ContentMixin, AuditMixin, PublishMixin, SlugifyMixin
+from core.models.mixins import AuditMixin, PublishMixin, CompleteArticleMixin
 
 
-class Project(ContentMixin, AuditMixin, PublishMixin, SlugifyMixin):
+class Project(CompleteArticleMixin):
     url = models.URLField(_("Project URL"), null=True, blank=True)
     skills = models.ManyToManyField('skills.Skill', verbose_name=_("Related skills"))
 
@@ -40,7 +40,7 @@ def project_image_upload_location(instance, filename):
     return 'uploads/projects/images/%s' % filename
 
 
-class ProjectImage(AuditMixin, PublishMixin, SlugifyMixin):
+class ProjectImage(AuditMixin, PublishMixin):
     project = models.ForeignKey('Project')
     title = models.CharField(_("Image name"), max_length=50)
     description = models.CharField(_("Description"), max_length=1500)
@@ -68,14 +68,14 @@ def project_attachment_upload_location(instance, filename):
     return 'uploads/projects/attachments/%s' % filename
 
 
-class ProjectAttachment(AuditMixin, PublishMixin, SlugifyMixin):
+class ProjectAttachment(AuditMixin, PublishMixin):
     project = models.ForeignKey('Project')
     title = models.CharField(_("Attachment name"), max_length=50)
     description = models.CharField(_("Description"), max_length=1500)
     file = models.FileField(_("Attachment"), upload_to=project_attachment_upload_location)
 
 
-class ProjectLink(AuditMixin, PublishMixin, SlugifyMixin):
+class ProjectLink(AuditMixin, PublishMixin):
     project = models.ForeignKey('Project')
     title = models.CharField(_("Link name"), max_length=50)
     description = models.CharField( max_length=1500)

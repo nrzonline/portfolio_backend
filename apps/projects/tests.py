@@ -70,13 +70,6 @@ class TestProjectImageModel(TestCase):
         project_image.save()
         self.assertNotEqual(project_image.datetime_modified, None)
 
-    def test_project_image_slug_updated_on_title_change(self):
-        project_image = ProjectImageFactory.create()
-        project_image.title = "A new title"
-        project_image.save()
-
-        self.assertEqual(project_image.slug, "a-new-title")
-
 
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class TestProjectAttachmentModel(TestCase):
@@ -92,13 +85,6 @@ class TestProjectAttachmentModel(TestCase):
 
         project_attachment.save()
         self.assertNotEqual(project_attachment.datetime_modified, None)
-
-    def test_project_attachment_slug_updated_on_title_change(self):
-        project_attachment = ProjectAttachmentFactory.create()
-        project_attachment.title = "A new title"
-        project_attachment.save()
-
-        self.assertEqual(project_attachment.slug, "a-new-title")
 
 
 class TestProjectLinkModel(TestCase):

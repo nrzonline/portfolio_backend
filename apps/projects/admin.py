@@ -109,7 +109,6 @@ class ProjectImageAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
         'height',
         'datetime_created',
         'datetime_modified',
-        'slug',
     )
     list_display = (
         'title',
@@ -124,7 +123,6 @@ class ProjectImageAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
         'modified_by',
         'datetime_modified',
         'datetime_published',
-        'slug',
     )
 
     fieldsets = (
@@ -149,7 +147,6 @@ class ProjectImageAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
                 'modified_by',
                 'datetime_modified',
                 'datetime_published',
-                'slug',
             )
         }),
     )
@@ -160,7 +157,6 @@ class ProjectAttachmentAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
         'datetime_created',
         'datetime_modified',
         'created_by',
-        'slug',
     )
     list_display = (
         'project',
@@ -176,7 +172,6 @@ class ProjectAttachmentAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
         'modified_by',
         'datetime_modified',
         'datetime_published',
-        'slug',
     )
 
     fieldsets = (
@@ -200,7 +195,6 @@ class ProjectAttachmentAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
                 'modified_by',
                 'datetime_modified',
                 'datetime_published',
-                'slug',
             )
         }),
     )

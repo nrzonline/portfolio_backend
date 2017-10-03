@@ -13,17 +13,17 @@ class ProfileAdmin(admin.ModelAdmin):
     class Meta:
         model = Profile
 
-    readonly_fields = ('account',)
-    list_display = ('account', 'first_name', 'last_name', 'email', 'phone_number', 'is_published',)
+    readonly_fields = ('user',)
+    list_display = ('user', 'first_name', 'last_name', 'email', 'phone_number', 'is_published',)
     exclude = ('width', 'height',)
     formfield_overrides = {
         models.TextField: {'widget': forms.Textarea(attrs={'rows': 10, 'cols': 120})}
     }
 
     fieldsets = (
-        (_('Account'), {
+        (_('user'), {
             'fields': (
-                'account',
+                'user',
             )
         }),
         (_('Publish'), {

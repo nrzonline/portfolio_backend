@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 
 from projects.viewsets import ProjectViewSet
-from users.viewsets import AccountViewSet
+from users.viewsets import userViewSet
 from skills.viewsets import SkillViewSet, CategoryViewSet
 from contact.viewsets import ContactMessageCustomErrorMessagesViewSet
 from profiles.viewsets import ProfileViewSet
@@ -15,7 +15,7 @@ from resume.viewsets import WorkViewSet, EducationViewSet, InterestViewSet
 
 
 router = routers.DefaultRouter()
-router.register(r'account', AccountViewSet, base_name='account')
+router.register(r'user', userViewSet, base_name='user')
 router.register(r'project', ProjectViewSet, base_name='project')
 router.register(r'skill', SkillViewSet, base_name='skill')
 router.register(r'skill-category', CategoryViewSet, base_name='categories')

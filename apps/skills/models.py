@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from core.services import unique_filename
-from core.models.mixins import ContentMixin, AuditMixin, PublishMixin, SlugifyMixin
+from core.models.mixins import ContentMixin, AuditMixin, PublishMixin, SlugMixin, CompleteArticleMixin
 
 
 def skill_image_upload_location(instance, filename):
@@ -13,7 +13,7 @@ def skill_image_upload_location(instance, filename):
     return 'uploads/skills/images/%s' % filename
 
 
-class Skill(ContentMixin, AuditMixin, PublishMixin, SlugifyMixin):
+class Skill(CompleteArticleMixin):
     category = models.ForeignKey('skills.SkillCategory')
     level_max = models.IntegerField(_("Level caps"), default=10)
     level = models.IntegerField(_("Current skill level"))
@@ -27,7 +27,7 @@ class Skill(ContentMixin, AuditMixin, PublishMixin, SlugifyMixin):
         return self.title
 
 
-class SkillCategory(AuditMixin, PublishMixin, SlugifyMixin):
+class SkillCategory(AuditMixin, PublishMixin, SlugMixin):
     class Meta:
         verbose_name_plural = _("Skill categories")
 

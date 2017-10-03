@@ -17,7 +17,7 @@ def profile_photo_upload_location(instance, filename):
 
 
 class Profile(models.Model):
-    account = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     photo = models.ImageField(_("Screenshot"), upload_to=profile_photo_upload_location,
                               width_field='width', height_field='height',
                               null=True, blank=True)
@@ -47,14 +47,14 @@ class Profile(models.Model):
         if self.first_name:
             return self.first_name
         else:
-            return self.account.username
+            return self.user.username
 
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(
-            account=instance,
+            user=instance,
             first_name=instance.first_name,
             last_name=instance.last_name,
             email=instance.email,

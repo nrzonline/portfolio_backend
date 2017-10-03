@@ -11,8 +11,8 @@ from profiles.models import Profile
 class TestProfileModel(TestCase):
     def test_profile_create_on_user_creation(self):
         user = UserFactory.create()
-        profile = Profile.objects.get(account=user)
+        profile = Profile.objects.get(user=user)
 
-        self.assertTrue(profile.account, user)
+        self.assertTrue(profile.user, user)
 
 

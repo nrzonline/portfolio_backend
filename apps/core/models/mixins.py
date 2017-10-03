@@ -1,8 +1,10 @@
-from django.utils.translation import ugettext as _
+from datetime import datetime
+
 from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
-from datetime import datetime
+from django.utils.translation import ugettext as _
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class ContentMixin(models.Model):
@@ -48,14 +50,30 @@ class PublishMixin(models.Model):
         abstract = True
 
 
-class SlugifyMixin(models.Model):
+class SlugMixin(models.Model):
     slug = models.SlugField()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        return super(SlugifyMixin, self).save(*args, **kwargs)
+        return super(SlugMixin, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True
 
 
+class VoteMixin(models.Model):
+    votes = GenericRelation('votes.Vote')
+
+    class Meta:
+        abstract = True
+
+
+class CompleteArticleMixin(
+    ContentMixin,
+    AuditMixin,
+    PublishMixin,
+    SlugMixin,
+    VoteMixin
+):
+    class Meta:
+        abstract = True

@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext as _
 
 from resume.models import Work, WorkImage, Education, Interest
+from core.admin.mixins import ModelAdminSetAuditMixin
 
 
 class WorkImageInline(admin.TabularInline):
@@ -19,7 +20,7 @@ class WorkImageInline(admin.TabularInline):
     )
 
 
-class WorkAdmin(admin.ModelAdmin):
+class WorkAdmin(ModelAdminSetAuditMixin):
     exclude = (
         'width',
         'height',
@@ -73,13 +74,8 @@ class WorkAdmin(admin.ModelAdmin):
         }),
     )
 
-    def save_model(self, request, obj, form, change):
-        obj.created_by = request.user
-        obj.request = request
-        return super(WorkAdmin, self).save_model(request, obj, form, change)
 
-
-class EducationAdmin(admin.ModelAdmin):
+class EducationAdmin(ModelAdminSetAuditMixin):
     list_display = (
         'title',
         'date_from',
@@ -128,7 +124,7 @@ class EducationAdmin(admin.ModelAdmin):
     )
 
 
-class InterestAdmin(admin.ModelAdmin):
+class InterestAdmin(ModelAdminSetAuditMixin):
     list_display = (
         'title',
         'is_published',

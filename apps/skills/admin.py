@@ -5,9 +5,10 @@ from django.contrib import admin
 from django.utils.translation import ugettext as _
 
 from skills.models import Skill, SkillCategory
+from core.admin.mixins import ModelAdminSetAuditMixin
 
 
-class SkillAdmin(admin.ModelAdmin):
+class SkillAdmin(ModelAdminSetAuditMixin):
     exclude = (
         'width',
         'height',
@@ -39,6 +40,7 @@ class SkillAdmin(admin.ModelAdmin):
         (_('Publish'), {
             'fields': (
                 'is_published',
+                'category',
             )
         }),
         (_('Details'), {
@@ -46,6 +48,8 @@ class SkillAdmin(admin.ModelAdmin):
                 'title',
                 'description',
                 'content',
+                'image',
+                'level',
             )
         }),
         (_('Information'), {
@@ -60,13 +64,8 @@ class SkillAdmin(admin.ModelAdmin):
         }),
     )
 
-    def save_model(self, request, obj, form, change):
-        obj.created_by = request.user
-        obj.request = request
-        return super(SkillAdmin, self).save_model(request, obj, form, change)
 
-
-class SkillCategoryAdmin(admin.ModelAdmin):
+class SkillCategoryAdmin(ModelAdminSetAuditMixin):
     exclude = (
         'slug',
     )

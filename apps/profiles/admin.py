@@ -7,27 +7,38 @@ from django import forms
 from django.db import models
 
 from profiles.models import Profile
+from core.admin.mixins import ModelAdminSetAuditMixin
 
 
-class ProfileAdmin(admin.ModelAdmin):
+class ProfileAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
     class Meta:
         model = Profile
 
-    readonly_fields = ('user',)
-    list_display = ('user', 'first_name', 'last_name', 'email', 'phone_number', 'is_published',)
-    exclude = ('width', 'height',)
+    readonly_fields = (
+        'user',
+        'datetime_created',
+        'datetime_published',
+        'datetime_modified',
+        'modified_by',
+        'slug',)
+    list_display = (
+        'user',
+        'first_name',
+        'last_name',
+        'email',
+        'phone_number',
+        'is_published',)
+    exclude = (
+        'width',
+        'height',)
     formfield_overrides = {
         models.TextField: {'widget': forms.Textarea(attrs={'rows': 10, 'cols': 120})}
     }
 
     fieldsets = (
-        (_('user'), {
+        (_('User'), {
             'fields': (
                 'user',
-            )
-        }),
-        (_('Publish'), {
-            'fields': (
                 'is_published',
             )
         }),
@@ -58,7 +69,15 @@ class ProfileAdmin(admin.ModelAdmin):
                 'stackoverflow_url',
                 'github_url',
            )
-        })
+        }),
+        (_('Information'), {
+            'fields': (
+                'modified_by',
+                'datetime_modified',
+                'datetime_published',
+                'slug',
+            )
+        }),
     )
 
 

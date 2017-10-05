@@ -51,10 +51,20 @@ class PublishMixin(models.Model):
 
 
 class SlugMixin(models.Model):
+    slugify_field = 'title'
+
     slug = models.SlugField()
 
+    def get_slug(self):
+        try:
+            slugify_field_value = getattr(self, self.slugify_field)
+        except AttributeError:
+            raise AttributeError("Field '%s' was marked as field to be used as slug, but does not exist in '%s'" %
+                                 (self.slugify_field, self.__class__.__name__))
+        return slugify(slugify_field_value)
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = self.get_slug()
         return super(SlugMixin, self).save(*args, **kwargs)
 
     class Meta:

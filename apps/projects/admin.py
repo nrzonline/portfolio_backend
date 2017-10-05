@@ -103,7 +103,7 @@ class ProjectAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
     )
 
 
-class ProjectImageAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
+class ProjectImageAdmin(ModelAdminSetAuditMixin):
     exclude = (
         'width',
         'height',

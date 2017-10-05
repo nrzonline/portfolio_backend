@@ -88,6 +88,7 @@ REST_FRAMEWORK = {
 
 STATISTICS_IGNORED_MODULES = [
     'admin',
+    'static',
 ]
 
 LANGUAGE_CODE = 'EN-us'

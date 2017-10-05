@@ -8,6 +8,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from core.models.mixins import AuditMixin, PublishMixin, SlugMixin
 from core.services import unique_filename
 
 
@@ -16,9 +17,11 @@ def profile_photo_upload_location(instance, filename):
     return 'uploads/projects/images/%s' % filename
 
 
-class Profile(models.Model):
+class Profile(AuditMixin, PublishMixin, SlugMixin, models.Model):
+    slugify_field = 'user'
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    photo = models.ImageField(_("Screenshot"), upload_to=profile_photo_upload_location,
+    photo = models.ImageField(_("Screen shot"), upload_to=profile_photo_upload_location,
                               width_field='width', height_field='height',
                               null=True, blank=True)
     width = models.IntegerField(_("Image width"), null=True, blank=True)
@@ -40,14 +43,11 @@ class Profile(models.Model):
     twitter_url = models.URLField(_("Twitter Url"), null=True, blank=True)
     stackoverflow_url = models.URLField(_("Stackoverflow Url"), null=True, blank=True)
     github_url = models.URLField(_("GitHub Url"), null=True, blank=True)
-    is_published = models.BooleanField(_("Profile published?"), default=False)
-    datetime_modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         if self.first_name:
             return self.first_name
-        else:
-            return self.user.username
+        return self.user.username
 
 
 @receiver(post_save, sender=User)

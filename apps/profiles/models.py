@@ -7,6 +7,7 @@ from django.utils.text import ugettext_lazy as _
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import datetime
 
 from core.models.mixins import AuditMixin, PublishMixin, SlugMixin
 from core.services import unique_filename
@@ -44,16 +45,29 @@ class Profile(AuditMixin, PublishMixin, SlugMixin, models.Model):
     stackoverflow_url = models.URLField(_("Stackoverflow Url"), null=True, blank=True)
     github_url = models.URLField(_("GitHub Url"), null=True, blank=True)
 
+    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Modified by"),
+                                    related_name="%(app_label)s_%(class)s_modified_related",
+                                    null=True, blank=True)
+    datetime_created = models.DateTimeField(_("Created on"), auto_now_add=True)
+    datetime_modified = models.DateTimeField(_("Modified on"), null=True, blank=True)
+    created_by = None
+
     def __str__(self):
         if self.first_name:
             return self.first_name
         return self.user.username
+
+    def save(self, *args, **kwargs):
+        if self.id:
+            self.datetime_modified = datetime.now()
+        return super(AuditMixin, self).save(*args, **kwargs)
 
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(
+            created_by=instance.user,
             user=instance,
             first_name=instance.first_name,
             last_name=instance.last_name,

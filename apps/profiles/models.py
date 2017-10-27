@@ -67,7 +67,6 @@ class Profile(AuditMixin, PublishMixin, SlugMixin, models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(
-            created_by=instance.user,
             user=instance,
             first_name=instance.first_name,
             last_name=instance.last_name,

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'skills',
     'profiles',
     'resume',
+    'multimedia',
     'votes',
     'statistics',
     'core',

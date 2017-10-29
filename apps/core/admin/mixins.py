@@ -1,5 +1,8 @@
 from django.contrib.admin.options import ModelAdmin
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.safestring import mark_safe
+from django.urls import reverse
+
 
 
 class ModelAdminSetAuditMixin(ModelAdmin):
@@ -42,4 +45,13 @@ class ModelAdminSetAuditMixin(ModelAdmin):
                     obj.created_by = request.user
         formset.save()
 
+
+class ContentObjectFieldMixin(object):
+    def related_content_object(self, obj):
+        app_label = obj.content_type.app_label
+        model = obj.content_type.model
+        object_admin_url = reverse('admin:%s_%s_change' % (app_label, model), args=(obj.object_id,))
+        return mark_safe("<a href='%s'>%s | %s</a>" % (object_admin_url, app_label, obj.content_object,))
+    related_content_object.short_description = "Content object"
+    related_content_object.admin_order_field = 'content_type'
 

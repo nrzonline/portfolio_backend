@@ -2,15 +2,16 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.translation import ugettext as _
 
-from projects.models import Project, ProjectImage, ProjectAttachment, ProjectLink
+from projects.models import Project
+from multimedia.models import Image, File, Link
 from core.admin.mixins import ModelAdminSetAuditMixin
 
 
-class ProjectImageInline(admin.TabularInline):
-    model = ProjectImage
-    fk_name = 'project'
+class ImageInline(GenericTabularInline):
+    model = Image
     extra = 0
     fields = (
         'title',
@@ -21,9 +22,8 @@ class ProjectImageInline(admin.TabularInline):
     )
 
 
-class ProjectAttachmentInline(admin.TabularInline):
-    model = ProjectAttachment
-    fk_name = 'project'
+class FileInline(GenericTabularInline):
+    model = File
     extra = 0
     fields = (
         'title',
@@ -33,9 +33,8 @@ class ProjectAttachmentInline(admin.TabularInline):
     )
 
 
-class ProjectLinkInline(admin.TabularInline):
-    model = ProjectLink
-    fk_name = 'project'
+class LinkInline(GenericTabularInline):
+    model = Link
     extra = 0
     fields = (
         'title',
@@ -71,9 +70,9 @@ class ProjectAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
         'skills',
     )
     inlines = [
-        ProjectImageInline,
-        ProjectAttachmentInline,
-        ProjectLinkInline,
+        ImageInline,
+        FileInline,
+        LinkInline,
     ]
 
     fieldsets = (
@@ -102,153 +101,4 @@ class ProjectAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
         }),
     )
 
-
-class ProjectImageAdmin(ModelAdminSetAuditMixin):
-    exclude = (
-        'width',
-        'height',
-        'datetime_created',
-        'datetime_modified',
-    )
-    list_display = (
-        'title',
-        'project',
-        'image',
-        'is_primary',
-        'is_published',
-    )
-    readonly_fields = (
-        'created_by',
-        'datetime_created',
-        'modified_by',
-        'datetime_modified',
-        'datetime_published',
-    )
-
-    fieldsets = (
-        (_('Publish'), {
-            'fields': (
-                'is_published',
-            )
-        }),
-        (_('Image details'), {
-            'fields': (
-                'project',
-                'title',
-                'image',
-                'description',
-                'is_primary',
-            )
-        }),
-        (_('Information'), {
-            'fields': (
-                'created_by',
-                'datetime_created',
-                'modified_by',
-                'datetime_modified',
-                'datetime_published',
-            )
-        }),
-    )
-
-
-class ProjectAttachmentAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
-    exclude = (
-        'datetime_created',
-        'datetime_modified',
-        'created_by',
-    )
-    list_display = (
-        'project',
-        'title',
-        'file',
-        'datetime_created',
-        'datetime_modified',
-        'is_published',
-    )
-    readonly_fields = (
-        'created_by',
-        'datetime_created',
-        'modified_by',
-        'datetime_modified',
-        'datetime_published',
-    )
-
-    fieldsets = (
-        (_('Publish'), {
-            'fields': (
-                'is_published',
-            )
-        }),
-        (_('Attachment details'), {
-            'fields': (
-                'project',
-                'title',
-                'file',
-                'description',
-            )
-        }),
-        (_('Information'), {
-            'fields': (
-                'created_by',
-                'datetime_created',
-                'modified_by',
-                'datetime_modified',
-                'datetime_published',
-            )
-        }),
-    )
-
-
-class ProjectLinkAdmin(ModelAdminSetAuditMixin, admin.ModelAdmin):
-    exclude = (
-        'datetime_created',
-        'datetime_modified',
-        'created_by',
-    )
-    list_display = (
-        'project',
-        'title',
-        'url',
-        'description',
-        'datetime_created',
-        'datetime_modified',
-        'is_published',
-    )
-    readonly_fields = (
-        'created_by',
-        'datetime_created',
-        'modified_by',
-        'datetime_modified',
-        'datetime_published',
-    )
-
-    fieldsets = (
-        (_('Publish'), {
-            'fields': (
-                'is_published',
-            )
-        }),
-        (_('Attachment details'), {
-            'fields': (
-                'project',
-                'title',
-                'description',
-                'url',
-            )
-        }),
-        (_('Information'), {
-            'fields': (
-                'created_by',
-                'datetime_created',
-                'modified_by',
-                'datetime_modified',
-                'datetime_published',
-            )
-        }),
-    )
-
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(ProjectImage, ProjectImageAdmin)
-admin.site.register(ProjectAttachment, ProjectAttachmentAdmin)
-admin.site.register(ProjectLink, ProjectLinkAdmin)

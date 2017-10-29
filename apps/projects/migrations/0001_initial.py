@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import projects.models
+import multimedia.models
 
 
 class Migration(migrations.Migration):
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=50, verbose_name='Attachment name')),
                 ('description', models.CharField(max_length=1500, verbose_name='Description')),
-                ('file', models.FileField(upload_to=projects.models.project_attachment_upload_location, verbose_name='Attachment')),
+                ('file', models.FileField(upload_to=multimedia.models.upload_image_location, verbose_name='Attachment')),
                 ('is_published', models.BooleanField(verbose_name='Is published?')),
                 ('datetime_added', models.DateTimeField(auto_now_add=True, verbose_name='Added on')),
                 ('datetime_modified', models.DateTimeField(blank=True, null=True, verbose_name='Updated on')),
@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=50, verbose_name='Image name')),
                 ('description', models.CharField(max_length=1500, verbose_name='Description')),
-                ('image', models.ImageField(height_field='height', upload_to=projects.models.project_image_upload_location, verbose_name='Screenshot', width_field='width')),
+                ('image', models.ImageField(height_field='height', upload_to=multimedia.models.upload_image_location, verbose_name='Screenshot', width_field='width')),
                 ('width', models.IntegerField(verbose_name='Image width')),
                 ('height', models.IntegerField(verbose_name='Image height')),
                 ('is_primary', models.BooleanField(default=False, verbose_name='Primary Image?')),

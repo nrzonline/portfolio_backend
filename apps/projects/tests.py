@@ -44,25 +44,28 @@ class TestProjectModel(TestCase):
         self.assertTrue(primary_image)
 
     def test_project_multimedia_published_images(self):
-        ImageFactory.create(
-            content_type=self.content_type,
-            content_object=self.project,
-            is_published=True)
+        for is_published in [True, False]:
+            ImageFactory.create(
+                content_type=self.content_type,
+                content_object=self.project,
+                is_published=is_published)
         published_images = self.project.published_images
         self.assertEqual(len(published_images), 1)
 
     def test_project_multimedia_published_files(self):
-        FileFactory.create(
-            content_type=self.content_type,
-            content_object=self.project,
-            is_published=True)
+        for is_published in [True, False]:
+            FileFactory.create(
+                content_type=self.content_type,
+                content_object=self.project,
+                is_published=is_published)
         published_files = self.project.published_files
         self.assertEqual(len(published_files), 1)
 
     def test_project_multimedia_published_links(self):
-        LinkFactory.create(
-            content_type=self.content_type,
-            content_object=self.project,
-            is_published=True)
+        for is_published in [True, False]:
+            LinkFactory.create(
+                content_type=self.content_type,
+                content_object=self.project,
+                is_published=is_published)
         published_links = self.project.published_links
         self.assertEqual(len(published_links), 1)

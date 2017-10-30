@@ -4,14 +4,11 @@ from __future__ import unicode_literals
 from django.db import IntegrityError
 from django.test import TestCase
 from django.contrib.contenttypes.models import ContentType
-import tempfile
 
 from projects.factories import ProjectFactory
 from multimedia.factories import ImageFactory, FileFactory, LinkFactory
 from projects.serializers import ProjectListSerializer, ProjectDetailSerializer
 from projects.viewsets import ProjectViewSet
-
-TEMP_MEDIA_ROOT = tempfile.mkdtemp()
 
 
 class TestProjectModel(TestCase):

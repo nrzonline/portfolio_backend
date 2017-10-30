@@ -8,6 +8,8 @@ import tempfile
 
 from projects.factories import ProjectFactory
 from multimedia.factories import ImageFactory, FileFactory, LinkFactory
+from projects.serializers import ProjectListSerializer, ProjectDetailSerializer
+from projects.viewsets import ProjectViewSet
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp()
 
@@ -69,3 +71,18 @@ class TestProjectModel(TestCase):
                 is_published=is_published)
         published_links = self.project.published_links
         self.assertEqual(len(published_links), 1)
+
+
+class TestProjectViewSets(TestCase):
+    def setUp(self):
+        self.project_view_set = ProjectViewSet()
+
+    def test_project_view_set_list_uses_list_serializer(self):
+        self.project_view_set.action = 'list'
+        view_set_serializer_class = self.project_view_set.get_serializer_class()
+        self.assertEqual(view_set_serializer_class, ProjectListSerializer)
+
+    def test_project_view_set_detail_uses_detail_serializer(self):
+        self.project_view_set.action = 'detail'
+        view_set_serializer_class = self.project_view_set.get_serializer_class()
+        self.assertEqual(view_set_serializer_class, ProjectDetailSerializer)

@@ -5,10 +5,14 @@ htmlcov/
 static/
 static_media/
 
+portfolio/settings/production.py
 portfolio/settings/development.py
 portfolio/settings/secret.py
 portfolio/settings/load.py
+portfolio/uwsgi.ini
 
+uwsgi.log
+uwsgi.pid
 *.sqlite3
 *.pyc
 .coverage
